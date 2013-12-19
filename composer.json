@@ -1,5 +1,5 @@
 {
-	"name": "rusporting/yii2-user-management",
+	"name": "rusporting/yii2-user",
 	"type": "yii2-extension",
 	"description": "User management extension for Yii2.",
 	"authors": [
@@ -10,13 +10,14 @@
     ],
 	"autoload": {
         "psr-0": {
-            "rusporting\\users\\": ""
+            "rusporting\\user\\": ""
         }
     },
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.0",
-        "yiisoft/yii2": "*"
+        "yiisoft/yii2": "*",
+	    "rusporting/core": "*"
     },
-	"target-dir": "rusporting/users"
+	"target-dir": "rusporting/user"
 }
