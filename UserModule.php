@@ -10,6 +10,7 @@ namespace rusporting\user;
 
 use Yii;
 use yii\base\Module;
+use rusporting\user\models\User;
 
 class UserModule extends Module {
 
@@ -30,6 +31,12 @@ class UserModule extends Module {
 	public function init()
 	{
 		parent::init();
+
+		Yii::$app->on(\yii\web\User::EVENT_AFTER_LOGIN, function($event){
+			if ($event->identity) {
+				$event->identity->updateLastVisitTime();
+			}
+		});
 
 		//register translation messages from module
 		//so no need do add to config/main.php

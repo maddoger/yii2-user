@@ -6,6 +6,7 @@ use Yii;
 use yii\web\Controller;
 use yii\web\AccessControl;
 use rusporting\user\models\LoginForm;
+use rusporting\user\models\User;
 use yii\web\Response;
 
 class AuthController extends Controller
@@ -21,7 +22,7 @@ class AuthController extends Controller
 						'allow' => true,
 					],
 					[
-						'actions' => ['logout', 'index'],
+						'actions' => ['logout'],
 						'allow' => true,
 						'roles' => ['@'],
 					],
@@ -34,21 +35,12 @@ class AuthController extends Controller
 	public function actionLogin()
 	{
 		if (!\Yii::$app->user->isGuest) {
-			$this->goHome();
+			$this->goBack();
 		}
 
 		$model = new LoginForm();
 		if ($model->load($_POST) && $model->login()) {
-
-			$text = 'Ура! '.Yii::$app->user->getIdentity()->username;
-
-			var_dump(Yii::$app->getSession());
-
-
-			return $text;
-
-
-			//return $this->goBack();
+			return $this->goBack();
 		} else {
 			return $this->render('login', [
 				'model' => $model,

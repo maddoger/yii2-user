@@ -2,6 +2,7 @@
 
 namespace rusporting\user\models;
 
+use Yii;
 use rusporting\core\components\CoreActiveRecord;
 use yii\helpers\Security;
 use yii\web\IdentityInterface;
@@ -37,10 +38,11 @@ use yii\web\IdentityInterface;
  * @property string $vk_name
  * @property string $vk_data
  * @property string $status
+ * @property integer $last_visit_time
  * @property integer $create_time
  * @property integer $update_time
  */
-class User extends CoreActiveRecord
+class User extends CoreActiveRecord implements IdentityInterface
 {
 	/**
 	 * @var string the raw password. Used to collect password input and isn't saved in database
@@ -113,6 +115,18 @@ class User extends CoreActiveRecord
 	}
 
 	/**
+	 * Update last visit time
+	 *
+	 * @param null|integer $time
+	 * @return $this
+	 */
+	public function updateLastVisitTime($time=null)
+	{
+		$this->last_visit_time = $time ? $time : time();
+		$this->save(false, ['last_visit_time']);
+	}
+
+	/**
 	 * @return int|string current user ID
 	 */
 	public function getId()
@@ -156,27 +170,12 @@ class User extends CoreActiveRecord
 			['email', 'filter', 'filter' => 'trim'],
 			['email', 'required'],
 			['email', 'email'],
-			['email', 'unique', 'message' => 'This email address has already been taken.', 'on' => 'signup'],
-			['email', 'exist', 'message' => 'There is no user with such email.', 'on' => 'requestPasswordResetToken'],
+			['email', 'unique', 'message' => Yii::t('user', 'This email address has already been taken.'), 'on' => 'signup'],
+			['email', 'exist', 'message' => Yii::t('user', 'There is no user with such email.'), 'on' => 'requestPasswordResetToken'],
 
 			['password', 'required'],
 			['password', 'string', 'min' => 4],
 		];
-
-		/*
-		 		return [
-			[['username', 'username_canonical', 'auth_key', 'password_hash', 'email', 'email_canonical', 'email_confirmed', 'create_time', 'update_time'], 'required'],
-			[['email_confirmed'], 'boolean'],
-			[['date_of_birth'], 'safe'],
-			[['facebook_data', 'twitter_data', 'gplus_data', 'vk_data', 'status'], 'string'],
-			[['create_time', 'update_time'], 'integer'],
-			[['username', 'username_canonical', 'password_hash', 'email', 'email_canonical', 'full_name', 'facebook_uid', 'facebook_name', 'twitter_uid', 'twitter_name', 'gplus_uid', 'gplus_name', 'vk_uid', 'vk_name'], 'string', 'max' => 255],
-			[['auth_key', 'password_reset_token'], 'string', 'max' => 32],
-			[['first_name', 'last_name', 'nick_name', 'patronimic'], 'string', 'max' => 50],
-			[['short_name'], 'string', 'max' => 100],
-			[['gender'], 'string', 'max' => 1]
-		];
-		 */
 	}
 
 	public function scenarios()
@@ -218,38 +217,39 @@ class User extends CoreActiveRecord
 	public function attributeLabels()
 	{
 		return [
-			'id' => 'ID',
-			'username' => 'Username',
-			'username_canonical' => 'Username Canonical',
-			'auth_key' => 'Auth Key',
-			'password_hash' => 'Password Hash',
-			'password_reset_token' => 'Password Reset Token',
-			'email' => 'Email',
-			'email_canonical' => 'Email Canonical',
-			'email_confirmed' => 'Email Confirmed',
-			'first_name' => 'First Name',
-			'last_name' => 'Last Name',
-			'nick_name' => 'Nick Name',
-			'patronimic' => 'Patronimic',
-			'short_name' => 'Short Name',
-			'full_name' => 'Full Name',
-			'date_of_birth' => 'Date Of Birth',
-			'gender' => 'Gender',
-			'facebook_uid' => 'Facebook Uid',
-			'facebook_name' => 'Facebook Name',
-			'facebook_data' => 'Facebook Data',
-			'twitter_uid' => 'Twitter Uid',
-			'twitter_name' => 'Twitter Name',
-			'twitter_data' => 'Twitter Data',
-			'gplus_uid' => 'Gplus Uid',
-			'gplus_name' => 'Gplus Name',
-			'gplus_data' => 'Gplus Data',
-			'vk_uid' => 'Vk Uid',
-			'vk_name' => 'Vk Name',
-			'vk_data' => 'Vk Data',
-			'status' => 'Status',
-			'create_time' => 'Create Time',
-			'update_time' => 'Update Time',
+			'id' => Yii::t('user', 'ID'),
+			'username' => Yii::t('user', 'Username'),
+			'username_canonical' => Yii::t('user', 'Username Canonical'),
+			'auth_key' => Yii::t('user', 'Auth Key'),
+			'password_hash' => Yii::t('user', 'Password Hash'),
+			'password_reset_token' => Yii::t('user', 'Password Reset Token'),
+			'email' => Yii::t('user', 'Email'),
+			'email_canonical' => Yii::t('user', 'Email Canonical'),
+			'email_confirmed' => Yii::t('user', 'Email Confirmed'),
+			'first_name' => Yii::t('user', 'First Name'),
+			'last_name' => Yii::t('user', 'Last Name'),
+			'nick_name' => Yii::t('user', 'Nick Name'),
+			'patronimic' => Yii::t('user', 'Patronimic'),
+			'short_name' => Yii::t('user', 'Short Name'),
+			'full_name' => Yii::t('user', 'Full Name'),
+			'date_of_birth' => Yii::t('user', 'Date Of Birth'),
+			'gender' => Yii::t('user', 'Gender'),
+			'facebook_uid' => Yii::t('user', 'Facebook Uid'),
+			'facebook_name' => Yii::t('user', 'Facebook Name'),
+			'facebook_data' => Yii::t('user', 'Facebook Data'),
+			'twitter_uid' => Yii::t('user', 'Twitter Uid'),
+			'twitter_name' => Yii::t('user', 'Twitter Name'),
+			'twitter_data' => Yii::t('user', 'Twitter Data'),
+			'gplus_uid' => Yii::t('user', 'Gplus Uid'),
+			'gplus_name' => Yii::t('user', 'Gplus Name'),
+			'gplus_data' => Yii::t('user', 'Gplus Data'),
+			'vk_uid' => Yii::t('user', 'Vk Uid'),
+			'vk_name' => Yii::t('user', 'Vk Name'),
+			'vk_data' => Yii::t('user', 'Vk Data'),
+			'status' => Yii::t('user', 'Status'),
+			'last_visit_time' => Yii::t('user', 'Last visit time'),
+			'create_time' => Yii::t('user', 'Create Time'),
+			'update_time' => Yii::t('user', 'Update Time'),
 		];
 	}
 }
