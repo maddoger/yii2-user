@@ -23,7 +23,7 @@ class m131219_084259_create_user_table extends \yii\db\Migration
 
 			'email' => Schema::TYPE_STRING . ' NOT NULL',
 			'email_canonical' => Schema::TYPE_STRING . ' NOT NULL',
-			'email_confirmed' => Schema::TYPE_BOOLEAN . ' NOT NULL',
+			'email_confirmed' => Schema::TYPE_BOOLEAN . ' NOT NULL DEFAULT FALSE',
 
 			//Name
 			'first_name' => Schema::TYPE_STRING. '(50)',
@@ -56,7 +56,6 @@ class m131219_084259_create_user_table extends \yii\db\Migration
 			'vk_data' => Schema::TYPE_TEXT,
 
 			'status' => Schema::TYPE_SMALLINT . ' NOT NULL DEFAULT 10',
-			'super_user' => Schema::TYPE_BOOLEAN. ' NOT NULL', //Super user?
 
 			'last_visit_time' => Schema::TYPE_INTEGER,
 			'create_time' => Schema::TYPE_INTEGER.' NOT NULL',

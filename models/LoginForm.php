@@ -1,6 +1,6 @@
 <?php
 
-namespace common\models;
+namespace rusporting\user\models;
 
 use Yii;
 use yii\base\Model;
@@ -38,8 +38,11 @@ class LoginForm extends Model
 	public function validatePassword()
 	{
 		$user = $this->getUser();
+		if (!$user) {
+			$this->addError('username', Yii::t('user', 'User with this username does not exist.'));
+		}
 		if (!$user || !$user->validatePassword($this->password)) {
-			$this->addError('password', 'Incorrect username or password.');
+			$this->addError('password', Yii::t('user', 'Incorrect username or password.'));
 		}
 	}
 
@@ -57,14 +60,14 @@ class LoginForm extends Model
 	}
 
 	/**
-	 * Finds user by [[username]]
+	 * Finds user by [[username]] or [[email]]
 	 *
 	 * @return User|null
 	 */
 	private function getUser()
 	{
 		if ($this->_user === false) {
-			$this->_user = User::findByUsername($this->username);
+			$this->_user = User::findByUsernameOrEmail($this->username);
 		}
 		return $this->_user;
 	}

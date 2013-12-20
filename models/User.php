@@ -66,14 +66,6 @@ class User extends CoreActiveRecord
 	}
 
 	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return '{{%user_user}}';
-	}
-
-	/**
 	 * Finds an identity by the given ID.
 	 *
 	 * @param string|integer $id the ID to be looked for
@@ -85,14 +77,39 @@ class User extends CoreActiveRecord
 	}
 
 	/**
-	 * Finds user by username
+	 * Finds active user by username (canonical)
 	 *
 	 * @param string $username
 	 * @return null|User
 	 */
 	public static function findByUsername($username)
 	{
-		return static::find(['username' => $username, 'status' => static::STATUS_ACTIVE]);
+		return static::find(['username_canonical' => $username, 'status' => static::STATUS_ACTIVE]);
+	}
+
+	/**
+	 * Finds active user by email (canonical)
+	 *
+	 * @param string $email
+	 * @return null|User
+	 */
+	public static function findByEmail($email)
+	{
+		return static::find(['email_canonical' => $email, 'status' => static::STATUS_ACTIVE]);
+	}
+
+	/**
+	 * Finds active user by username or email (canonical)
+	 *
+	 * @param string $usernameOrEmail
+	 * @return null|User
+	 */
+	public static function findByUsernameOrEmail($usernameOrEmail)
+	{
+		return static::find(['and',
+			['or', ['username_canonical' => $usernameOrEmail], ['email_canonical' => $usernameOrEmail]],
+			['status' => static::STATUS_ACTIVE]]
+		);
 	}
 
 	/**
@@ -143,7 +160,7 @@ class User extends CoreActiveRecord
 			['email', 'exist', 'message' => 'There is no user with such email.', 'on' => 'requestPasswordResetToken'],
 
 			['password', 'required'],
-			['password', 'string', 'min' => 6],
+			['password', 'string', 'min' => 4],
 		];
 
 		/*
@@ -180,9 +197,19 @@ class User extends CoreActiveRecord
 			if ($this->isNewRecord) {
 				$this->auth_key = Security::generateRandomKey();
 			}
+
+			$dirty = $this->getDirtyAttributes(['email', 'username']);
+			if ($this->isNewRecord || isset($dirty['email'])) $this->email_canonical = $this->canonicalize($this->email);
+			if ($this->isNewRecord || isset($dirty['username'])) $this->username_canonical = $this->canonicalize($this->username);
+
 			return true;
 		}
 		return false;
+	}
+
+	public function canonicalize($string)
+	{
+		return mb_convert_case($string, MB_CASE_LOWER, mb_detect_encoding($string));
 	}
 
 	/**

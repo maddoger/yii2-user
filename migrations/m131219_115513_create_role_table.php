@@ -54,21 +54,23 @@ class m131219_115513_create_role_table extends \yii\db\Migration
 
 	public function safeDown()
 	{
-		//Roles table
-		$this->dropPrimaryKey($this->db->tablePrefix.'auth_item_pk', '{{%auth_item}}');
-		$this->dropIndex($this->db->tablePrefix.'auth_item_type_ix', '{{%auth_item}}');
-		$this->dropTable('{{%auth_item}}');
-
-		//Role hierarchy
-		$this->dropPrimaryKey($this->db->tablePrefix.'auth_item_child_pk', '{{%auth_item_child}}');
 		$this->dropForeignKey($this->db->tablePrefix.'auth_item_child_parent_fk', '{{%auth_item_child}}');
 		$this->dropForeignKey($this->db->tablePrefix.'auth_item_child_child_fk', '{{%auth_item_child}}');
-		$this->dropTable('{{%auth_item_child}}');
+
+		$this->dropForeignKey($this->db->tablePrefix.'auth_assignment_item_name_fk', '{{%auth_assignment}}');
+		$this->dropForeignKey($this->db->tablePrefix.'auth_assignment_user_id_fk', '{{%auth_assignment}}');
 
 		//User - role
 		$this->dropPrimaryKey($this->db->tablePrefix.'auth_assignment_pk', '{{%auth_assignment}}');
-		$this->dropForeignKey($this->db->tablePrefix.'auth_assignment_item_name_fk', '{{%auth_assignment}}');
-		$this->dropForeignKey($this->db->tablePrefix.'auth_assignment_user_id_fk', '{{%auth_assignment}}');
 		$this->dropTable('{{%auth_assignment}}');
+
+		//Role hierarchy
+		$this->dropPrimaryKey($this->db->tablePrefix.'auth_item_child_pk', '{{%auth_item_child}}');
+		$this->dropTable('{{%auth_item_child}}');
+		$this->dropIndex($this->db->tablePrefix.'auth_item_type_ix', '{{%auth_item}}');
+
+		//Roles table
+		$this->dropPrimaryKey($this->db->tablePrefix.'auth_item_pk', '{{%auth_item}}');
+		$this->dropTable('{{%auth_item}}');
 	}
 }
