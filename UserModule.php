@@ -14,7 +14,11 @@ use rusporting\user\models\User;
 
 class UserModule extends Module {
 
-	public $setUserComponentSettings=true;
+	public $loginLogo = '';
+	public $loginLayout = 'auth';
+
+	public $passwordResetTokenEmail = '@rusporting/user/mails/passwordResetToken';
+
 	public $autoLogin=true;
 
 	public $registrationUrl = array("/user/registration");
@@ -32,6 +36,11 @@ class UserModule extends Module {
 	{
 		parent::init();
 
+		//Console
+		if (Yii::$app instanceof \yii\console\Application) {
+			$this->controllerNamespace = 'rusporting\user\console\controllers';
+		}
+
 		Yii::$app->on(\yii\web\User::EVENT_AFTER_LOGIN, function($event){
 			if ($event->identity) {
 				$event->identity->updateLastVisitTime();
@@ -40,7 +49,7 @@ class UserModule extends Module {
 
 		//register translation messages from module
 		//so no need do add to config/main.php
-		Yii::$app->getI18n()->translations['user'] =
+		Yii::$app->getI18n()->translations['rusporting\user'] =
 		   array(
 			   'class'=>'yii\i18n\PhpMessageSource',
 			   'basePath'=>'@rusporting/user/messages',

@@ -39,10 +39,10 @@ class LoginForm extends Model
 	{
 		$user = $this->getUser();
 		if (!$user) {
-			$this->addError('username', Yii::t('user', 'User with this username does not exist.'));
+			$this->addError('username', Yii::t('rusporting\user', 'User with this username or email does not exist.'));
 		}
 		if (!$user || !$user->validatePassword($this->password)) {
-			$this->addError('password', Yii::t('user', 'Incorrect username or password.'));
+			$this->addError('password', Yii::t('rusporting\user', 'Incorrect username or password.'));
 		}
 	}
 
@@ -70,5 +70,18 @@ class LoginForm extends Model
 			$this->_user = User::findByUsernameOrEmail($this->username);
 		}
 		return $this->_user;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function attributeLabels()
+	{
+		return [
+			'id' => Yii::t('rusporting\user', 'ID'),
+			'username' => Yii::t('rusporting\user', 'Username'),
+			'password' => Yii::t('rusporting\user', 'Password'),
+			'rememberMe' => Yii::t('rusporting\user', 'Remember me'),
+		];
 	}
 }
