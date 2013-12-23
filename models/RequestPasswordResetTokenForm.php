@@ -28,7 +28,7 @@ class RequestPasswordResetTokenForm extends Model
 			// user has to be exist
 			['email', 'validateUser'],
 			// verifyCode needs to be entered correctly
-			['verifyCode', 'captcha', 'captchaAction' => 'user/auth/captcha'],
+			['verifyCode', 'captcha', 'captchaAction' => 'user/backend-auth/captcha'],
 		];
 	}
 

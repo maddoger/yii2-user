@@ -31,7 +31,7 @@ CaptchaAsset::register($this);
 			<p>
 				<?= Html::submitButton(Yii::t('rusporting\user', 'Send'), ['class' => 'btn btn-lg btn-block btn-success']) ?>
 			</p>
-			<p class="text-center"><?= Yii::t('rusporting\user', 'Remembered your password?') .' '. Html::a(Yii::t('rusporting\user', 'Login here'), ['/user/login']) ?></p>
+			<p class="text-center"><?= Yii::t('rusporting\user', 'Remembered your password?') .' '. Html::a(Yii::t('rusporting\user', 'Login here'), ['/user/backend-auth/login']) ?></p>
 			<?php ActiveForm::end(); ?>
 		</div>
 

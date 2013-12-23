@@ -3,7 +3,7 @@
 namespace rusporting\user\models;
 
 use Yii;
-use rusporting\core\components\CoreActiveRecord;
+use rusporting\core\components\ActiveRecord;
 use yii\helpers\Security;
 use yii\web\IdentityInterface;
 
@@ -42,7 +42,7 @@ use yii\web\IdentityInterface;
  * @property integer $create_time
  * @property integer $update_time
  */
-class User extends CoreActiveRecord implements IdentityInterface
+class User extends ActiveRecord implements IdentityInterface
 {
 	/**
 	 * @var string the raw password. Used to collect password input and isn't saved in database
@@ -60,8 +60,8 @@ class User extends CoreActiveRecord implements IdentityInterface
 			'timestamp' => [
 				'class' => 'yii\behaviors\AutoTimestamp',
 				'attributes' => [
-					CoreActiveRecord::EVENT_BEFORE_INSERT => ['create_time', 'update_time'],
-					CoreActiveRecord::EVENT_BEFORE_UPDATE => 'update_time',
+					ActiveRecord::EVENT_BEFORE_INSERT => ['create_time', 'update_time'],
+					ActiveRecord::EVENT_BEFORE_UPDATE => 'update_time',
 				],
 			],
 		];

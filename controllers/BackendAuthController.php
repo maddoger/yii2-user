@@ -12,12 +12,12 @@ use rusporting\user\models\LoginForm;
 use rusporting\user\models\User;
 use rusporting\user\models\RequestPasswordResetTokenForm;
 
-class AuthController extends Controller
+class BackendAuthController extends Controller
 {
 	public function init()
 	{
 		parent::init();
-		$this->layout = $this->module->loginLayout;
+		$this->layout = $this->module->authBackendLayout;
 	}
 
 	public function behaviors()
@@ -73,7 +73,7 @@ class AuthController extends Controller
 		if ($model->load($_POST) && $model->validate()) {
 			if ($this->sendPasswordResetEmail($model->email)) {
 				Yii::$app->getSession()->setFlash('success', Yii::t('rusporting\user', 'Check your email for further instructions.'));
-				return $this->redirect('user/login');
+				return $this->goHome();
 			} else {
 				Yii::$app->getSession()->setFlash('error', Yii::t('rusporting\user', 'There was an error sending email.'));
 			}
