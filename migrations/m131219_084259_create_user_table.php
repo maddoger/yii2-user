@@ -34,6 +34,9 @@ class m131219_084259_create_user_table extends \yii\db\Migration
 			'short_name' => Schema::TYPE_STRING. '(100)',
 			'full_name' => Schema::TYPE_STRING. '(255)',
 
+			//Avatar
+			'avatar' => Schema::TYPE_STRING. '(255)',
+
 			//Info
 			'date_of_birth' => Schema::TYPE_DATE,
 			'gender' => Schema::TYPE_STRING. '(1)',

@@ -23,6 +23,7 @@ use yii\web\IdentityInterface;
  * @property string $patronimic
  * @property string $short_name
  * @property string $full_name
+ * @property string $avatar
  * @property string $date_of_birth
  * @property string $gender
  * @property string $facebook_uid
@@ -170,8 +171,8 @@ class User extends ActiveRecord implements IdentityInterface
 			['email', 'filter', 'filter' => 'trim'],
 			['email', 'required'],
 			['email', 'email'],
-			['email', 'unique', 'message' => Yii::t('rusporting\user', 'This email address has already been taken.'), 'on' => 'signup'],
-			['email', 'exist', 'message' => Yii::t('rusporting\user', 'There is no user with such email.'), 'on' => 'requestPasswordResetToken'],
+			['email', 'unique', 'message' => Yii::t('rusporting/user', 'This email address has already been taken.'), 'on' => 'signup'],
+			['email', 'exist', 'message' => Yii::t('rusporting/user', 'There is no user with such email.'), 'on' => 'requestPasswordResetToken'],
 
 			['password', 'required'],
 			['password', 'string', 'min' => 4],
@@ -201,6 +202,22 @@ class User extends ActiveRecord implements IdentityInterface
 			if ($this->isNewRecord || isset($dirty['email'])) $this->email_canonical = $this->canonicalize($this->email);
 			if ($this->isNewRecord || isset($dirty['username'])) $this->username_canonical = $this->canonicalize($this->username);
 
+			//Name update
+			$dirtyNames = $this->getDirtyAttributes(['first_name', 'last_name', 'nick_name', 'patronimic']);
+			if (count($dirtyNames)>0) {
+				if (!empty($this->first_name) && !empty($this->last_name)) {
+					$this->short_name = trim($this->first_name).' '.trim($this->last_name);
+					$this->full_name = trim($this->last_name).' '.trim($this->first_name);
+					if (!empty($this->patronimic)) $this->full_name = $this->full_name .' '.trim($this->patronimic);
+				} elseif (!empty($this->nick_name)) {
+					$this->short_name = $this->nick_name;
+					$this->full_name = $this->nick_name;
+				} else {
+					$this->short_name = $this->username;
+					$this->full_name = $this->username;
+				}
+			}
+
 			return true;
 		}
 		return false;
@@ -217,40 +234,41 @@ class User extends ActiveRecord implements IdentityInterface
 	public function attributeLabels()
 	{
 		return [
-			'id' => Yii::t('rusporting\user', 'ID'),
-			'username' => Yii::t('rusporting\user', 'Username'),
-			'username_canonical' => Yii::t('rusporting\user', 'Username Canonical'),
-			'auth_key' => Yii::t('rusporting\user', 'Auth Key'),
-			'password' => Yii::t('rusporting\user', 'Password'),
-			'password_hash' => Yii::t('rusporting\user', 'Password Hash'),
-			'password_reset_token' => Yii::t('rusporting\user', 'Password Reset Token'),
-			'email' => Yii::t('rusporting\user', 'Email'),
-			'email_canonical' => Yii::t('rusporting\user', 'Email Canonical'),
-			'email_confirmed' => Yii::t('rusporting\user', 'Email Confirmed'),
-			'first_name' => Yii::t('rusporting\user', 'First Name'),
-			'last_name' => Yii::t('rusporting\user', 'Last Name'),
-			'nick_name' => Yii::t('rusporting\user', 'Nick Name'),
-			'patronimic' => Yii::t('rusporting\user', 'Patronimic'),
-			'short_name' => Yii::t('rusporting\user', 'Short Name'),
-			'full_name' => Yii::t('rusporting\user', 'Full Name'),
-			'date_of_birth' => Yii::t('rusporting\user', 'Date Of Birth'),
-			'gender' => Yii::t('rusporting\user', 'Gender'),
-			'facebook_uid' => Yii::t('rusporting\user', 'Facebook Uid'),
-			'facebook_name' => Yii::t('rusporting\user', 'Facebook Name'),
-			'facebook_data' => Yii::t('rusporting\user', 'Facebook Data'),
-			'twitter_uid' => Yii::t('rusporting\user', 'Twitter Uid'),
-			'twitter_name' => Yii::t('rusporting\user', 'Twitter Name'),
-			'twitter_data' => Yii::t('rusporting\user', 'Twitter Data'),
-			'gplus_uid' => Yii::t('rusporting\user', 'Gplus Uid'),
-			'gplus_name' => Yii::t('rusporting\user', 'Gplus Name'),
-			'gplus_data' => Yii::t('rusporting\user', 'Gplus Data'),
-			'vk_uid' => Yii::t('rusporting\user', 'Vk Uid'),
-			'vk_name' => Yii::t('rusporting\user', 'Vk Name'),
-			'vk_data' => Yii::t('rusporting\user', 'Vk Data'),
-			'status' => Yii::t('rusporting\user', 'Status'),
-			'last_visit_time' => Yii::t('rusporting\user', 'Last visit time'),
-			'create_time' => Yii::t('rusporting\user', 'Create Time'),
-			'update_time' => Yii::t('rusporting\user', 'Update Time'),
+			'id' => Yii::t('rusporting/user', 'ID'),
+			'username' => Yii::t('rusporting/user', 'Username'),
+			'username_canonical' => Yii::t('rusporting/user', 'Username Canonical'),
+			'auth_key' => Yii::t('rusporting/user', 'Auth Key'),
+			'password' => Yii::t('rusporting/user', 'Password'),
+			'password_hash' => Yii::t('rusporting/user', 'Password Hash'),
+			'password_reset_token' => Yii::t('rusporting/user', 'Password Reset Token'),
+			'email' => Yii::t('rusporting/user', 'Email'),
+			'email_canonical' => Yii::t('rusporting/user', 'Email Canonical'),
+			'email_confirmed' => Yii::t('rusporting/user', 'Email Confirmed'),
+			'first_name' => Yii::t('rusporting/user', 'First Name'),
+			'last_name' => Yii::t('rusporting/user', 'Last Name'),
+			'nick_name' => Yii::t('rusporting/user', 'Nick Name'),
+			'patronimic' => Yii::t('rusporting/user', 'Patronimic'),
+			'short_name' => Yii::t('rusporting/user', 'Short Name'),
+			'full_name' => Yii::t('rusporting/user', 'Full Name'),
+			'avatar' => Yii::t('rusporting/user', 'Avatar'),
+			'date_of_birth' => Yii::t('rusporting/user', 'Date Of Birth'),
+			'gender' => Yii::t('rusporting/user', 'Gender'),
+			'facebook_uid' => Yii::t('rusporting/user', 'Facebook Uid'),
+			'facebook_name' => Yii::t('rusporting/user', 'Facebook Name'),
+			'facebook_data' => Yii::t('rusporting/user', 'Facebook Data'),
+			'twitter_uid' => Yii::t('rusporting/user', 'Twitter Uid'),
+			'twitter_name' => Yii::t('rusporting/user', 'Twitter Name'),
+			'twitter_data' => Yii::t('rusporting/user', 'Twitter Data'),
+			'gplus_uid' => Yii::t('rusporting/user', 'Gplus Uid'),
+			'gplus_name' => Yii::t('rusporting/user', 'Gplus Name'),
+			'gplus_data' => Yii::t('rusporting/user', 'Gplus Data'),
+			'vk_uid' => Yii::t('rusporting/user', 'Vk Uid'),
+			'vk_name' => Yii::t('rusporting/user', 'Vk Name'),
+			'vk_data' => Yii::t('rusporting/user', 'Vk Data'),
+			'status' => Yii::t('rusporting/user', 'Status'),
+			'last_visit_time' => Yii::t('rusporting/user', 'Last visit time'),
+			'create_time' => Yii::t('rusporting/user', 'Create Time'),
+			'update_time' => Yii::t('rusporting/user', 'Update Time'),
 		];
 	}
 }

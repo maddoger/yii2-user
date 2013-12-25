@@ -18,6 +18,8 @@
  */
 return array (
   'Auth Key' => '',
+  'Avatar' => '',
+  'Backend authorization route' => '',
   'Check your email for further instructions.' => 'Проверьте свою почту для получения дальнейших инструкций.',
   'Create Time' => 'Дата создания',
   'Date Of Birth' => 'Дата рождения',
@@ -52,6 +54,7 @@ return array (
   'Please choose your new password:' => 'Введите новый пароль:',
   'Please fill out your email. A link to reset password will be sent there.' => 'Введите свой email. Ссылка для сброса пароля будет отправлена на него.',
   'Please sign in' => 'Войдите',
+  'Provides authorization and password reset (with captcha) for backend application.' => '',
   'Remember me' => 'Запомнить',
   'Remembered your password?' => 'Вспомнили свой пароль?',
   'Request password reset' => 'Запрос сброса пароля',
@@ -76,4 +79,7 @@ return array (
   'Vk Name' => '',
   'Vk Uid' => '',
   'Wrong password reset token.' => 'Неверный код сброса пароля.',
+
+  '_module_description_' => 'Управление авторизацией, пользователями и их правами.',
+  '_module_name_' => 'Пользователи',
 );

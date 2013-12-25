@@ -27,11 +27,12 @@ class UserModule extends Module
 	public $returnUrl = array('/');
 	public $returnLogoutUrl = array('/user/login');
 
+
 	/**
 	 * Translation category for Yii::t function
 	 * @var string
 	 */
-	public static $translationCategory = 'rusporting\user';
+	public $translationCategory = 'rusporting/user';
 
 	/**
 	 * @inheritdoc
@@ -53,7 +54,7 @@ class UserModule extends Module
 
 		//register translation messages from module
 		//so no need do add to config/main.php
-		Yii::$app->getI18n()->translations[static::$translationCategory] =
+		Yii::$app->getI18n()->translations[$this->translationCategory] =
 			array(
 				'class' => 'yii\i18n\PhpMessageSource',
 				'basePath' => '@rusporting/user/messages',
@@ -65,7 +66,7 @@ class UserModule extends Module
 	 */
 	public function getName()
 	{
-		return static::t('_module_name_');
+		return Yii::t('rusporting/user', '_module_name_');
 	}
 
 	/**
@@ -73,7 +74,7 @@ class UserModule extends Module
 	 */
 	public function getDescription()
 	{
-		return static::t('_module_description_');
+		return Yii::t('rusporting/user', '_module_description_');
 	}
 
 	/**
@@ -132,8 +133,8 @@ class UserModule extends Module
 		return [
 			[
 				['user/<action:(login|logout|captcha|request-password-reset|reset-password)>' => 'user/backend-auth/<action>'],
-				static::t('Backend authorization route'),
-				static::t('Provides authorization and password reset (with captcha) for backend application.')
+				Yii::t('rusporting/user', 'Backend authorization route'),
+				Yii::t('rusporting/user', 'Provides authorization and password reset (with captcha) for backend application.')
 			]
 		];
 	}
@@ -144,5 +145,23 @@ class UserModule extends Module
 	public function getRights()
 	{
 		return null;
+	}
+
+	/**
+	 * Returns navigation items for backend
+	 * @return array
+	 */
+	public function getBackendNavigation()
+	{
+		return [
+			[
+				'label' => Yii::t('rusporting/user', 'Users'),
+				//'url' => 'user/user-backend/index',
+				'items' => [
+					['label' => Yii::t('rusporting/user', 'Users list'), 'fa'=>'user', 'url'=> ['/user/users/index']],
+					['label' => Yii::t('rusporting/user', 'Groups list'), 'fa'=>'group', 'url'=> ['/user/groups/index']],
+				],
+			]
+		];
 	}
 }

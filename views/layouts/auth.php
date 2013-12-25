@@ -1,5 +1,5 @@
 <?php
-use backend\assets\AppAsset;
+use rusporting\user\BackendAuthAsset;
 use yii\helpers\Html;
 use rusporting\user\widgets\Alert;
 
@@ -7,7 +7,7 @@ use rusporting\user\widgets\Alert;
  * @var \yii\web\View $this
  * @var string $content
  */
-AppAsset::register($this);
+BackendAuthAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -15,11 +15,6 @@ AppAsset::register($this);
 <head>
 	<meta charset="<?= Yii::$app->charset ?>"/>
 	<title><?= Html::encode($this->title) ?></title>
-	<style>
-		#content {
-			margin-top: 20px;
-		}
-	</style>
 	<?php $this->head() ?>
 </head>
 <body>

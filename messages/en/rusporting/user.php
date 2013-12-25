@@ -18,6 +18,8 @@
  */
 return array (
   'Auth Key' => '',
+  'Avatar' => '',
+  'Backend authorization route' => '',
   'Check your email for further instructions.' => '',
   'Create Time' => '',
   'Date Of Birth' => '',
@@ -52,6 +54,7 @@ return array (
   'Please choose your new password:' => '',
   'Please fill out your email. A link to reset password will be sent there.' => '',
   'Please sign in' => '',
+  'Provides authorization and password reset (with captcha) for backend application.' => '',
   'Remember me' => '',
   'Remembered your password?' => '',
   'Request password reset' => '',
@@ -76,4 +79,7 @@ return array (
   'Vk Name' => '',
   'Vk Uid' => '',
   'Wrong password reset token.' => '',
+
+  '_module_description_' => 'Controls user authentication, groups and rights.',
+  '_module_name_' => 'Users',
 );
