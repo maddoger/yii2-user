@@ -28,7 +28,7 @@ class UserModule extends Module
 	public $returnUrl = array('/');
 	public $returnLogoutUrl = array('/user/login');
 
-	public $superUsers = ['admin2'];
+	public $superUsers = ['admin'];
 
 	protected $hasBackend = true;
 	protected $hasFrontend = true;

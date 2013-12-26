@@ -94,6 +94,16 @@ class RolesController extends BackendController
 		$model = new AuthItem;
 
 		if ($model->load($_POST) && $model->save()) {
+			if (isset($_POST[$model->formName()]['children'])) {
+				$children = $_POST[$model->formName()]['children'];
+
+				foreach ($children as $child) {
+					$new = new AuthItemChild();
+					$new->child = $child;
+					$new->parent = $model->name;
+					$new->save(false);
+				}
+			}
 			return $this->redirect(['view', 'id' => $model->name]);
 		} else {
 			return $this->render('create', [
