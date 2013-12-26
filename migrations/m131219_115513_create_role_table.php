@@ -16,8 +16,10 @@ class m131219_115513_create_role_table extends \yii\db\Migration
 		//Roles table
 		$this->createTable('{{%auth_item}}', [
 			'name' => Schema::TYPE_STRING. '(64) NOT NULL',
+			'module' => Schema::TYPE_STRING. '(64)',
 			'type' => Schema::TYPE_INTEGER.' NOT NULL',
 			'description' => Schema::TYPE_TEXT,
+			'biz_rule' => Schema::TYPE_TEXT,
 			'data' => Schema::TYPE_TEXT,
 		], $tableOptions);
 

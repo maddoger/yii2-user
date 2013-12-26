@@ -10,6 +10,7 @@ namespace rusporting\user;
 
 use Yii;
 use rusporting\core\Module;
+use yii\rbac\Item;
 
 class UserModule extends Module
 {
@@ -26,6 +27,8 @@ class UserModule extends Module
 	public $profileUrl = array('/user/profile');
 	public $returnUrl = array('/');
 	public $returnLogoutUrl = array('/user/login');
+
+	public $superUsers = ['admin2'];
 
 	protected $hasBackend = true;
 	protected $hasFrontend = true;
@@ -128,9 +131,29 @@ class UserModule extends Module
 	/**
 	 * @inheritdoc
 	 */
-	public function getRights()
+	public function getRbacRoles()
 	{
-		return null;
+		return [
+			'user.create' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('rusporting/user', 'Create new users')],
+			'user.read' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('rusporting/user', 'View users')],
+			'user.update' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('rusporting/user', 'Update users')],
+			'user.delete' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('rusporting/user', 'Delete users')],
+			'user.manager' => [
+				'type' => Item::TYPE_ROLE,
+				'description' => Yii::t('rusporting/user', Yii::t('rusporting/user', 'Users manager')),
+				'children' => [ 'user.create','user.read','user.update','user.delete' ]
+			],
+
+			'role.create' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('rusporting/user', 'Create new roles')],
+			'role.read' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('rusporting/user', 'View roles')],
+			'role.update' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('rusporting/user', 'Update roles')],
+			'role.delete' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('rusporting/user', 'Delete roles')],
+			'role.manager' => [
+				'type' => Item::TYPE_ROLE,
+				'description' => Yii::t('rusporting/user', Yii::t('rusporting/user', 'Roles manager')),
+				'children' => [ 'role.create','role.read','role.update','role.delete' ]
+			],
+		];
 	}
 
 	/**
@@ -144,8 +167,8 @@ class UserModule extends Module
 				'label' => Yii::t('rusporting/user', 'Users'),
 				//'url' => 'user/user-backend/index',
 				'items' => [
-					['label' => Yii::t('rusporting/user', 'Users list'), 'fa'=>'user', 'url'=> ['/user/users/index']],
-					['label' => Yii::t('rusporting/user', 'Groups list'), 'fa'=>'group', 'url'=> ['/user/groups/index']],
+					['label' => Yii::t('rusporting/user', 'Users list'), 'fa'=>'user', 'url'=> ['/user/users/index'], 'activeUrl'=> ['/user/users/*']],
+					['label' => Yii::t('rusporting/user', 'Roles list'), 'fa'=>'group', 'url'=> ['/user/roles/index'], 'activeUrl'=> ['/user/roles/*']],
 				],
 			]
 		];
