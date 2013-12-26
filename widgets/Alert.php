@@ -7,6 +7,8 @@
 
 namespace rusporting\user\widgets;
 
+use Yii;
+
 /**
  * Alert widget renders a message from session flash. All flash messages are displayed
  * in the sequence they were assigned using setFlash. You can set message as following:
@@ -44,6 +46,7 @@ class Alert extends \yii\bootstrap\Widget
 		parent::init();
 
 		$session = \Yii::$app->getSession();
+
 		$flashes = $session->getAllFlashes();
 		$appendCss = isset($this->options['class']) ? ' ' . $this->options['class'] : '';
 		

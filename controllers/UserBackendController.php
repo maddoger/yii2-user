@@ -2,7 +2,7 @@
 
 namespace rusporting\user\controllers;
 
-use rusporting\core\components\BackendController;
+use rusporting\core\BackendController;
 
 class UserBackendController extends BackendController
 {

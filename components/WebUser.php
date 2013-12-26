@@ -15,11 +15,12 @@ class WebUser extends BaseWebUser {
 		parent::init();
 
 		/**
-		 * @var \rusporting\user\UserModule
+		 * @var \rusporting\user\UserModule $module
 		 */
 		$module = Yii::$app->getModule('user');
 		if ($module) {
 			$this->loginUrl = $module->loginUrl;
+			$this->enableAutoLogin = $module->autoLogin;
 		}
 	}
 }

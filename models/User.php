@@ -3,7 +3,7 @@
 namespace rusporting\user\models;
 
 use Yii;
-use rusporting\core\components\ActiveRecord;
+use rusporting\core\ActiveRecord;
 use yii\helpers\Security;
 use yii\web\IdentityInterface;
 

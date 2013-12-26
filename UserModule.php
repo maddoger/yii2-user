@@ -9,7 +9,7 @@
 namespace rusporting\user;
 
 use Yii;
-use rusporting\core\components\Module;
+use rusporting\core\Module;
 
 class UserModule extends Module
 {
@@ -27,6 +27,8 @@ class UserModule extends Module
 	public $returnUrl = array('/');
 	public $returnLogoutUrl = array('/user/login');
 
+	protected $hasBackend = true;
+	protected $hasFrontend = true;
 
 	/**
 	 * Translation category for Yii::t function
@@ -104,23 +106,7 @@ class UserModule extends Module
 	/**
 	 * @inheritdoc
 	 */
-	public function hasFrontend()
-	{
-		return true;
-	}
-
-	/**
-	 * @inheritdoc
-	 */
-	public function hasBackend()
-	{
-		return true;
-	}
-
-	/**
-	 * @inheritdoc
-	 */
-	public function getConfigurationForm()
+	public function getConfigurationModel()
 	{
 		return null;
 	}

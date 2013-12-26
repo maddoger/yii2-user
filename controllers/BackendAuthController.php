@@ -7,7 +7,7 @@ use yii\web\AccessControl;
 use yii\web\BadRequestHttpException;
 use yii\helpers\Security;
 
-use rusporting\core\components\FrontendController;
+use rusporting\core\FrontendController;
 use rusporting\user\models\LoginForm;
 use rusporting\user\models\User;
 use rusporting\user\models\RequestPasswordResetTokenForm;
@@ -48,7 +48,7 @@ class BackendAuthController extends FrontendController
 	public function actionLogin()
 	{
 		if (!\Yii::$app->user->isGuest) {
-			$this->goBack();
+			return $this->goBack();
 		}
 
 		$model = new LoginForm();
