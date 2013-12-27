@@ -29,7 +29,7 @@ class RolesController extends BackendController
 						'roles' => ['role.read'],
 					],
 					[
-						'actions' => ['create'],
+						'actions' => ['create', 'update-from-modules'],
 						'allow' => true,
 						'roles' => ['role.create'],
 					],

@@ -43,6 +43,11 @@ class AuthAssignment extends \rusporting\core\ActiveRecord
 		];
 	}
 
+	public static function findByUserId($userId)
+	{
+		return static::find(['user_id' => $userId]);
+	}
+
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */

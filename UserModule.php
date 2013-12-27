@@ -11,6 +11,7 @@ namespace rusporting\user;
 use Yii;
 use rusporting\core\Module;
 use yii\rbac\Item;
+use yii\web\User;
 
 class UserModule extends Module
 {
@@ -51,7 +52,7 @@ class UserModule extends Module
 			$this->controllerNamespace = 'rusporting\user\console\controllers';
 		}
 
-		Yii::$app->on(\yii\web\User::EVENT_AFTER_LOGIN, function ($event) {
+		Yii::$app->on(User::EVENT_AFTER_LOGIN, function ($event) {
 			if ($event->identity) {
 				$event->identity->updateLastVisitTime();
 			}
@@ -93,9 +94,9 @@ class UserModule extends Module
 	/**
 	 * @inheritdoc
 	 */
-	public function getIcon()
+	public function getFaIcon()
 	{
-		return null;
+		return 'users';
 	}
 
 	/**
@@ -140,7 +141,7 @@ class UserModule extends Module
 			'user.delete' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('rusporting/user', 'Delete users')],
 			'user.manager' => [
 				'type' => Item::TYPE_ROLE,
-				'description' => Yii::t('rusporting/user', Yii::t('rusporting/user', 'Users manager')),
+				'description' => Yii::t('rusporting/user', 'Users manager'),
 				'children' => [ 'user.create','user.read','user.update','user.delete' ]
 			],
 
@@ -150,7 +151,7 @@ class UserModule extends Module
 			'role.delete' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('rusporting/user', 'Delete roles')],
 			'role.manager' => [
 				'type' => Item::TYPE_ROLE,
-				'description' => Yii::t('rusporting/user', Yii::t('rusporting/user', 'Roles manager')),
+				'description' => Yii::t('rusporting/user', 'Roles manager'),
 				'children' => [ 'role.create','role.read','role.update','role.delete' ]
 			],
 		];
@@ -164,7 +165,7 @@ class UserModule extends Module
 	{
 		return [
 			[
-				'label' => Yii::t('rusporting/user', 'Users'),
+				'label' => Yii::t('rusporting/user', 'Users'), 'fa' => 'users',
 				//'url' => 'user/user-backend/index',
 				'items' => [
 					['label' => Yii::t('rusporting/user', 'Users list'), 'fa'=>'user', 'url'=> ['/user/users/index'], 'activeUrl'=> ['/user/users/*']],

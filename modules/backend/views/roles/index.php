@@ -17,8 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
 	<div>
-		<div class="pull-left"><?= Html::a('Create new role', ['create'], ['class' => 'btn btn-success']) ?></div>
-		<div class="pull-right"><?= Html::a('Update roles from modules', ['update-from-modules'], ['class' => 'btn btn-primary']) ?></div>
+		<div class="pull-left"><?= Html::a(Yii::t('rusporting/user', 'Create new role'), ['create'], ['class' => 'btn btn-success']) ?></div>
+		<div class="pull-right"><?= Html::a(Yii::t('rusporting/user', 'Update roles from modules'), ['update-from-modules'], ['class' => 'btn btn-primary']) ?></div>
 		<div class="clearfix"></div>
 	</div>
 	<br />

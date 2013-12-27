@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		<?= Html::a(Yii::t('rusporting/user', 'Update'), ['update', 'id' => $model->name], ['class' => 'btn btn-primary']) ?>
 		<?php echo Html::a(Yii::t('rusporting/user', 'Delete'), ['delete', 'id' => $model->name], [
 			'class' => 'btn btn-danger',
-			'data-confirm' => Yii::t('app', Yii::t('rusporting/user', 'Are you sure to delete this item?')),
+			'data-confirm' => Yii::t('rusporting/user', 'Are you sure to delete this item?'),
 			'data-method' => 'post',
 		]); ?>
 	</p>
@@ -39,16 +39,21 @@ $this->params['breadcrumbs'][] = $this->title;
 	$children = $model->getChildren()->all();
 	$childrenVal = getChildren($children);
 
+	$types = $model->getTypeValues();
+
 	echo DetailView::widget([
 		'model' => $model,
 		'attributes' => [
 			'name',
-			'type',
+			[
+				'label' => Yii::t('rusporting/user', 'Type'),
+				'value' => $types[$model->type],
+			],
 			'description:ntext',
 			'biz_rule:ntext',
 			'data:ntext',
 			[
-				'label' => Yii::t('app', Yii::t('rusporting/user', 'Children roles')),
+				'label' => Yii::t('rusporting/user', 'Children roles'),
 				'format' => 'html',
 				'value' => $childrenVal,
 			],

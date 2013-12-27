@@ -23,8 +23,6 @@ class WebUser extends BaseWebUser {
 			],
 		]);
 
-		parent::init();
-
 		/**
 		 * @var \rusporting\user\UserModule $module
 		 */
@@ -32,6 +30,14 @@ class WebUser extends BaseWebUser {
 		if ($module) {
 			$this->loginUrl = $module->loginUrl;
 			$this->enableAutoLogin = $module->autoLogin;
+		}
+
+		parent::init();
+
+		if (!$this->getIsGuest()) {
+			$this->identity->setAttribute('last_visit_time', time());
+			// $this->identity->setAttribute('login_ip', ip2long(\Yii::$app->getRequest()->getUserIP()));
+			$this->identity->save(false);
 		}
 	}
 
@@ -41,7 +47,6 @@ class WebUser extends BaseWebUser {
 	protected function afterLogin($identity, $cookieBased)
 	{
 		parent::afterLogin($identity, $cookieBased);
-		$this->identity->setScenario(self::EVENT_AFTER_LOGIN);
 		$this->identity->setAttribute('last_visit_time', time());
 		// $this->identity->setAttribute('login_ip', ip2long(\Yii::$app->getRequest()->getUserIP()));
 		$this->identity->save(false);

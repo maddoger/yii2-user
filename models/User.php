@@ -2,6 +2,8 @@
 
 namespace rusporting\user\models;
 
+use rusporting\user\modules\backend\models\AuthAssignment;
+use rusporting\user\modules\backend\models\AuthItemChild;
 use Yii;
 use rusporting\core\ActiveRecord;
 use yii\helpers\Security;
@@ -20,7 +22,7 @@ use yii\web\IdentityInterface;
  * @property string $first_name
  * @property string $last_name
  * @property string $nick_name
- * @property string $patronimic
+ * @property string $patronymic
  * @property string $short_name
  * @property string $full_name
  * @property string $avatar
@@ -144,6 +146,50 @@ class User extends ActiveRecord implements IdentityInterface
 	}
 
 	/**
+	 * @return array gender items list
+	 */
+	public static function getGenderItems()
+	{
+		return [
+			0 => Yii::t('rusporting/user', 'Not known'),
+			1 => Yii::t('rusporting/user', 'Male'),
+			2 => Yii::t('rusporting/user', 'Female'),
+		];
+	}
+
+	public function getRolesAssignment()
+	{
+		return AuthAssignment::find()->where(['user_id' => $this->id])->all();
+	}
+
+	public function getRolesNames()
+	{
+		$assignment = $this->getRolesAssignment();
+		$names = [];
+		foreach ($assignment as $model) {
+			$names[] = $model->item_name;
+		}
+		return $names;
+	}
+
+	public function setRolesNames($roles)
+	{
+		AuthAssignment::find(['user_id' => $this->id])->delete();
+		if ($roles) {
+			foreach ($roles as $role)	{
+				$model = new AuthAssignment();
+				if (is_array($role)) {
+					$model->setAttributes($role);
+				} else {
+					$model->item_name = $role;
+				}
+				$model->user_id = $this->id;
+				$model->save(false);
+			}
+		}
+	}
+
+	/**
 	 * @param string $authKey
 	 * @return boolean if auth key is valid for current user
 	 */
@@ -175,7 +221,7 @@ class User extends ActiveRecord implements IdentityInterface
 			['email', 'exist', 'message' => Yii::t('rusporting/user', 'There is no user with such email.'), 'on' => 'requestPasswordResetToken'],
 
 			['password', 'required'],
-			['password', 'string', 'min' => 4],
+			['password', 'string', 'min' => 4]
 		];
 	}
 
@@ -185,13 +231,28 @@ class User extends ActiveRecord implements IdentityInterface
 			'signup' => ['username', 'email', 'password'],
 			'resetPassword' => ['password'],
 			'requestPasswordResetToken' => ['email'],
+			'backend' => [
+				'!id', 'username', 'email', 'password', 'first_name', 'last_name', 'nick_name', 'patronymic',
+				'date_of_birth', 'gender', 'facebook_uid', 'facebook_name', 'facebook_data',
+				'twitter_uid', 'twitter_name', 'twitter_data',
+				'gplus_uid', 'gplus_name', 'gplus_data',
+				'vk_uid', 'vk_name', 'vk_data',
+				'status', 'avatar', 'email_confirmed',
+				'rolesNames'
+			]
 		];
 	}
 
 	public function beforeSave($insert)
 	{
 		if (parent::beforeSave($insert)) {
-			if (($this->isNewRecord || $this->getScenario() === 'resetPassword') && !empty($this->password)) {
+			if (
+				$this->isNewRecord ||
+				(
+					$this->getScenario() === 'resetPassword' && !empty($this->password) ||
+					$this->getScenario() === 'backend' && !empty($this->password)
+				)
+			) {
 				$this->password_hash = Security::generatePasswordHash($this->password);
 			}
 			if ($this->isNewRecord) {
@@ -203,12 +264,12 @@ class User extends ActiveRecord implements IdentityInterface
 			if ($this->isNewRecord || isset($dirty['username'])) $this->username_canonical = $this->canonicalize($this->username);
 
 			//Name update
-			$dirtyNames = $this->getDirtyAttributes(['first_name', 'last_name', 'nick_name', 'patronimic']);
+			$dirtyNames = $this->getDirtyAttributes(['first_name', 'last_name', 'nick_name', 'patronymic']);
 			if (count($dirtyNames)>0) {
 				if (!empty($this->first_name) && !empty($this->last_name)) {
 					$this->short_name = trim($this->first_name).' '.trim($this->last_name);
 					$this->full_name = trim($this->last_name).' '.trim($this->first_name);
-					if (!empty($this->patronimic)) $this->full_name = $this->full_name .' '.trim($this->patronimic);
+					if (!empty($this->patronymic)) $this->full_name = $this->full_name .' '.trim($this->patronymic);
 				} elseif (!empty($this->nick_name)) {
 					$this->short_name = $this->nick_name;
 					$this->full_name = $this->nick_name;
@@ -247,7 +308,7 @@ class User extends ActiveRecord implements IdentityInterface
 			'first_name' => Yii::t('rusporting/user', 'First Name'),
 			'last_name' => Yii::t('rusporting/user', 'Last Name'),
 			'nick_name' => Yii::t('rusporting/user', 'Nick Name'),
-			'patronimic' => Yii::t('rusporting/user', 'Patronimic'),
+			'patronymic' => Yii::t('rusporting/user', 'Patronymic'),
 			'short_name' => Yii::t('rusporting/user', 'Short Name'),
 			'full_name' => Yii::t('rusporting/user', 'Full Name'),
 			'avatar' => Yii::t('rusporting/user', 'Avatar'),

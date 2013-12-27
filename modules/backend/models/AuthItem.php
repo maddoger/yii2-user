@@ -28,6 +28,7 @@ class AuthItem extends \rusporting\core\ActiveRecord
 	{
 		return [
 			[['name', 'type'], 'required'],
+			['name', 'match', 'pattern' => '/^[\da-zA-Z\.\-_]+$/', 'message' => Yii::t('rusporting/user', 'Only letters, numbers and comma are acceptable.')],
 			[['type'], 'integer'],
 			[['description', 'data', 'biz_rule'], 'string'],
 			[['name'], 'string', 'max' => 64]

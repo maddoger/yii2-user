@@ -29,7 +29,7 @@ class m131219_084259_create_user_table extends \yii\db\Migration
 			'first_name' => Schema::TYPE_STRING. '(50)',
 			'last_name' => Schema::TYPE_STRING. '(50)',
 			'nick_name' => Schema::TYPE_STRING. '(50)',
-			'patronimic' => Schema::TYPE_STRING. '(50)',
+			'patronymic' => Schema::TYPE_STRING. '(50)',
 
 			'short_name' => Schema::TYPE_STRING. '(100)',
 			'full_name' => Schema::TYPE_STRING. '(255)',
