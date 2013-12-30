@@ -118,7 +118,7 @@ class UsersController extends BackendController
 				$model->setScenario('resetPassword');
 				$model->password = $_POST[$model->formName()]['password'];
 				if ($model->save()) {
-					Yii::$app->getSession()->setFlash('success', Yii::t('rusporting/user', 'Password was reset successfully.'));
+					Yii::$app->getSession()->setFlash('success', Yii::t('rusporting/user', 'Password was changed successfully.'));
 					return $this->redirect(['view', 'id' => $model->id]);
 				}
 			} else

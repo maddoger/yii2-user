@@ -76,6 +76,7 @@ return array (
   'Password Hash' => 'Хеш пароля',
   'Password Reset Token' => 'Код сброса паролья',
   'Password reset for {name}' => 'Сброс пароля для {name}',
+  'Password was changed successfully.' => 'Пароль успешно изменен.',
   'Patronymic' => 'Отчество',
   'Please choose your new password:' => 'Введите новый пароль:',
   'Please fill out your email. A link to reset password will be sent there.' => 'Введите свой email. Ссылка для сброса пароля будет отправлена на него.',
