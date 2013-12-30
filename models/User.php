@@ -231,8 +231,17 @@ class User extends ActiveRecord implements IdentityInterface
 			'signup' => ['username', 'email', 'password'],
 			'resetPassword' => ['password'],
 			'requestPasswordResetToken' => ['email'],
-			'backend' => [
+			'backendCreate' => [
 				'!id', 'username', 'email', 'password', 'first_name', 'last_name', 'nick_name', 'patronymic',
+				'date_of_birth', 'gender', 'facebook_uid', 'facebook_name', 'facebook_data',
+				'twitter_uid', 'twitter_name', 'twitter_data',
+				'gplus_uid', 'gplus_name', 'gplus_data',
+				'vk_uid', 'vk_name', 'vk_data',
+				'status', 'avatar', 'email_confirmed',
+				'rolesNames'
+			],
+			'backendEdit' => [
+				'!id', 'username', 'email', 'first_name', 'last_name', 'nick_name', 'patronymic',
 				'date_of_birth', 'gender', 'facebook_uid', 'facebook_name', 'facebook_data',
 				'twitter_uid', 'twitter_name', 'twitter_data',
 				'gplus_uid', 'gplus_name', 'gplus_data',
@@ -250,7 +259,7 @@ class User extends ActiveRecord implements IdentityInterface
 				$this->isNewRecord ||
 				(
 					$this->getScenario() === 'resetPassword' && !empty($this->password) ||
-					$this->getScenario() === 'backend' && !empty($this->password)
+					$this->getScenario() === 'backendEdit' && !empty($this->password)
 				)
 			) {
 				$this->password_hash = Security::generatePasswordHash($this->password);

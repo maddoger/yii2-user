@@ -5,6 +5,7 @@ namespace rusporting\user\modules\backend\models;
 use yii\rbac\Item;
 use Yii;
 use rusporting\user\models\User;
+use rusporting\core\ActiveRecord;
 
 /**
  * This is the model class for table "public.tbl_auth_item".
@@ -19,8 +20,12 @@ use rusporting\user\models\User;
  * @property AuthAssignment $assignment
  * @property AuthItem[] $users
  */
-class AuthItem extends \rusporting\core\ActiveRecord
+class AuthItem extends ActiveRecord
 {
+	const TYPE_OPERATION = Item::TYPE_OPERATION;
+	const TYPE_TASK = Item::TYPE_TASK;
+	const TYPE_ROLE = Item::TYPE_ROLE;
+
 	/**
 	 * @inheritdoc
 	 */

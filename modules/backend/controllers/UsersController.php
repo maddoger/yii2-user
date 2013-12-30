@@ -8,6 +8,7 @@ use rusporting\user\modules\backend\models\UserSearch;
 use rusporting\core\BackendController;
 use yii\web\NotFoundHttpException;
 use yii\web\VerbFilter;
+use Yii;
 
 /**
  * UsersController implements the CRUD actions for User model.
@@ -89,6 +90,7 @@ class UsersController extends BackendController
 	public function actionCreate()
 	{
 		$model = new User;
+		$model->setScenario('backendCreate');
 
 		if ($model->load($_POST) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->id]);
@@ -108,17 +110,23 @@ class UsersController extends BackendController
 	public function actionUpdate($id)
 	{
 		$model = $this->findModel($id);
-
-		$roles = AuthAssignment::findByUserId($id);
+		$model->setScenario('backendEdit');
 
 		if ($model->load($_POST) && $model->save()) {
+			if (isset($_POST[$model->formName()]['password']) && !empty($_POST[$model->formName()]['password'])) {
 
-			return $this->redirect(['view', 'id' => $model->id]);
-		} else {
-			return $this->render('update', [
-				'model' => $model,
-			]);
+				$model->setScenario('resetPassword');
+				$model->password = $_POST[$model->formName()]['password'];
+				if ($model->save()) {
+					Yii::$app->getSession()->setFlash('success', Yii::t('rusporting/user', 'Password was reset successfully.'));
+					return $this->redirect(['view', 'id' => $model->id]);
+				}
+			} else
+				return $this->redirect(['view', 'id' => $model->id]);
 		}
+		return $this->render('update', [
+			'model' => $model,
+		]);
 	}
 
 	/**
@@ -143,7 +151,6 @@ class UsersController extends BackendController
 	protected function findModel($id)
 	{
 		if (($model = User::find($id)) !== null) {
-			$model->setScenario('backend');
 			return $model;
 		} else {
 			throw new NotFoundHttpException(\Yii::t('rusporting/user', 'The requested user does not exist.'));

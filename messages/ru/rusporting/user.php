@@ -93,7 +93,7 @@ return array (
   'Roles manager' => 'Менеджер ролей',
   'Roles was update successfully!' => 'Роли были успешно обновлены!',
   'Save' => 'Сохранить',
-  'Search' => 'Найти',
+  'Search' => 'Поиск',
   'Send' => 'Отправить',
   'Short Name' => 'Краткое имя',
   'Social' => 'Социальные',

@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use rusporting\user\modules\backend\models\AuthItem;
+use rusporting\user\models\User;
 
 /**
  * @var yii\web\View $this
@@ -23,7 +25,25 @@ $this->params['breadcrumbs'][] = $this->title;
 		]); ?>
 	</p>
 
-	<?php echo DetailView::widget([
+	<?php
+
+	$all = AuthItem::find()->where(['type'=>\yii\rbac\Item::TYPE_ROLE])->select(['name', 'description'])->orderBy('name')->asArray()->all();
+	$items = [];
+	foreach ($all as $ar)
+	{
+		$items[$ar['name']] = $ar['name'].' - '.$ar['description'];
+	}
+	//echo $form->field($model, 'rolesNames')->listBox($items, ['class'=>'form-control select2', 'multiple'=> true, 'prompt' => Yii::t('rusporting/user', 'No roles')]);
+
+	$roles = '<ul class="list-unstyled">';
+	foreach ($model->getRolesNames() as $name) {
+		$roles .= '<li>'.Html::encode($items[$name]).'</li>';
+	}
+	$roles .= '</ul>';
+
+	$genders = User::getGenderItems();
+
+	echo DetailView::widget([
 		'model' => $model,
 		'attributes' => [
 			'id',
@@ -37,7 +57,11 @@ $this->params['breadcrumbs'][] = $this->title;
 			'short_name',
 			'full_name',
 			'date_of_birth',
-			'gender',
+			[
+				'label' => Yii::t('rusporting/user', 'Gender'),
+				'format' => 'text',
+				'value' => $genders[$model->gender],
+			],
 			'facebook_uid',
 			'facebook_name',
 			'facebook_data:ntext',
@@ -50,6 +74,11 @@ $this->params['breadcrumbs'][] = $this->title;
 			'vk_uid',
 			'vk_name',
 			'vk_data:ntext',
+			[
+				'label' => Yii::t('rusporting/user', 'Roles'),
+				'format' => 'html',
+				'value' => $roles,
+			],
 			'last_visit_time:datetime',
 			'create_time:datetime',
 			'update_time:datetime',

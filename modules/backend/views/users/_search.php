@@ -30,6 +30,7 @@ use rusporting\user\modules\backend\models\AuthItem;
 				<h4 class="panel-title">
 					<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
 						<?= Yii::t('rusporting/user', 'Search') ?>
+						<span class="caret"></span>
 					</a>
 				</h4>
 			</div>
