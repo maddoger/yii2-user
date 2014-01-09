@@ -57,7 +57,7 @@ use rusporting\user\models\User;
 
 					<?= $form->field($model, 'nick_name')->textInput(['maxlength' => 50]) ?>
 
-					<?= $form->field($model, 'date_of_birth')->textInput(['class' => 'date-editor']) ?>
+					<?= $form->field($model, 'date_of_birth')->textInput(['class' => 'form-control date-editor']) ?>
 
 					<?= $form->field($model, 'gender')->dropDownList(User::getGenderItems()) ?>
 

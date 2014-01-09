@@ -159,8 +159,10 @@ class RolesController extends BackendController
 		$modules = [];
 		$allModules = Yii::$app->getModules(false);
 
-		foreach ($allModules as $module) {
-			//If is rusporting module with info
+		foreach ($allModules as $id=>$module) {
+			if (is_array($module)) {
+				$module = Yii::$app->getModule($id);
+			}
 			if ($module instanceof Module) {
 				$roles = $module->getRbacRoles();
 				if (is_array($roles)) {
