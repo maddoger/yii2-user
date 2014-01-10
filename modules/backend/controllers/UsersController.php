@@ -7,6 +7,8 @@ use rusporting\user\modules\backend\models\AuthAssignment;
 use rusporting\user\modules\backend\models\UserSearch;
 use rusporting\core\BackendController;
 use yii\helpers\FileHelper;
+use yii\image\ImageDriver;
+use yii\validators\ImageValidator;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 use yii\web\VerbFilter;
@@ -116,31 +118,42 @@ class UsersController extends BackendController
 
 		if ($model->load($_POST)) {
 
-		    //Checking avatar
-			$avatar = UploadedFile::getInstance($model, 'avatar');
 
-			if ($avatar !== null) {
-				$model->avatar = $avatar;
-
-
-
-				if ($model->validate('avatar')) {
-					$filename = md5($model->id.$model->auth_key).'.'.$avatar->getExtension();
-
-					$url = Yii::getAlias('@frontendUrl/uploads/avatars/'.$filename);
-					$path = Yii::getAlias('@frontend/uploads/avatars');
-					FileHelper::createDirectory($path);
-					if ($avatar->saveAs($path.'/'.$filename)) {
-
+			if (isset($_POST['deleteAvatar']) && $_POST['deleteAvatar']==1) {
+				//Delete file
+				/*if ($model->avatar) {
+					$url = $model->avatar;
+					$path = Yii::getAlias('@frontendPath'.$url);
+					if (file_exists($path)) {
+						unlink($path);
 					}
-				}
-
-			} else {
+				}*/
 				$model->avatar = null;
-			}
-			var_dump($model->errors);
-			exit();
+			} else {
 
+				//Checking avatar
+				$avatar = UploadedFile::getInstanceByName('avatar');
+
+				if ($avatar !== null && $avatar->size>0 && $avatar->error == 0) {
+
+					$filename = md5($model->id.$model->auth_key).'.'.$avatar->getExtension();
+					$url = Yii::getAlias('@frontendUrl/uploads/avatars/'.$filename);
+					$path = Yii::getAlias('@frontendPath/uploads/avatars');
+
+					FileHelper::createDirectory($path);
+					$path = $path.'/'.$filename;
+
+					if ($avatar->saveAs($path)) {
+						$image = Yii::$app->image->load($path);
+						if ($image->width>150 && $image->height>150) {
+							$image->resize(150, 150, Yii\image\drivers\Image::HEIGHT);
+							$image->save($path, 100);
+						}
+						$model->avatar = $url;
+					}
+
+				}
+			}
 
 			if ($model->save()) {
 

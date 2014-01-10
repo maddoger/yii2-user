@@ -223,7 +223,7 @@ class User extends ActiveRecord implements IdentityInterface
 			['password', 'required'],
 			['password', 'string', 'min' => 4],
 
-			['avatar', 'image', 'minWidth' => 64, 'minHeight' => 64, 'maxWidth' => 150, 'maxHeight' => 150]
+			//['avatar', 'image', 'minWidth' => 64, 'minHeight' => 64, 'maxWidth' => 150, 'maxHeight' => 150]
 		];
 	}
 

@@ -57,17 +57,27 @@ use rusporting\user\models\User;
 
 					<?= $form->field($model, 'nick_name')->textInput(['maxlength' => 50]) ?>
 
-					<?= $form->field($model, 'date_of_birth')->textInput(['class' => 'form-control date-editor']) ?>
+					<?= $form->field($model, 'date_of_birth')->textInput(['class' => 'form-control date-editor',
+						'value' => Yii::$app->getFormatter()->format($model->date_of_birth, 'date')]) ?>
 
 					<?= $form->field($model, 'gender')->dropDownList(User::getGenderItems()) ?>
 
-					<?= $form->field($model, 'avatar')->fileInput() ?>
-
 					<?php
-					if ($model->avatar && !empty($model->avatar)) {
-						echo '<img src="'.Html::encode($model->avatar).'" alt="'.Html::encode($model->avatar).'" /><br/>';
-					}
+						$field =  $form->field($model, 'avatar');
+						$field->parts['{input}'] =
+							'<label>'.Html::checkbox('deleteAvatar') . '&nbsp;'.Yii::t('rusporting/admin', 'Delete').'</label><br />'
+					. \rusporting\admin\widgets\FileInput::widget(
+							[
+								'name' => 'avatar',
+								'value' => Yii::getAlias('@frontendUrl'.$model->avatar),
+								'style' => \rusporting\admin\widgets\FileInput::STYLE_IMAGE,
+								'width'=>150,
+								'height'=>150
+							]);
+						echo $field;
 					?>
+
+
 				</div>
 				<div class="tab-pane fade" id="social">
 					<?= $form->field($model, 'facebook_uid')->textInput(['maxlength' => 255]) ?>

@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			'nick_name',
 			'short_name',
 			'full_name',
-			'date_of_birth',
+			'date_of_birth:date',
 			[
 				'label' => Yii::t('rusporting/user', 'Gender'),
 				'format' => 'text',
@@ -82,7 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			'last_visit_time:datetime',
 			'create_time:datetime',
 			'update_time:datetime',
-			'avatar',
+			'avatar:image',
 		],
 	]); ?>
 
