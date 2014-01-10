@@ -16,7 +16,7 @@ use rusporting\user\models\User;
 
 	<?php $form = ActiveForm::begin(
 		[
-			'options' => array('class' => 'form-horizontal'),
+			'options' => array('class' => 'form-horizontal', 'enctype'=>'multipart/form-data'),
 			'fieldConfig' => array(
 				'labelOptions' => ['class' => 'control-label col-lg-2'],
 				'template' => "{label}\n<div class=\"col-lg-10\">{input}\n{error}\n{hint}</div>",
@@ -61,7 +61,13 @@ use rusporting\user\models\User;
 
 					<?= $form->field($model, 'gender')->dropDownList(User::getGenderItems()) ?>
 
-					<?= $form->field($model, 'avatar')->fileInput(['maxlength' => 255]) ?>
+					<?= $form->field($model, 'avatar')->fileInput() ?>
+
+					<?php
+					if ($model->avatar && !empty($model->avatar)) {
+						echo '<img src="'.Html::encode($model->avatar).'" alt="'.Html::encode($model->avatar).'" /><br/>';
+					}
+					?>
 				</div>
 				<div class="tab-pane fade" id="social">
 					<?= $form->field($model, 'facebook_uid')->textInput(['maxlength' => 255]) ?>

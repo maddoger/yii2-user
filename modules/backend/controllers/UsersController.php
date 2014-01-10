@@ -6,7 +6,9 @@ use rusporting\user\models\User;
 use rusporting\user\modules\backend\models\AuthAssignment;
 use rusporting\user\modules\backend\models\UserSearch;
 use rusporting\core\BackendController;
+use yii\helpers\FileHelper;
 use yii\web\NotFoundHttpException;
+use yii\web\UploadedFile;
 use yii\web\VerbFilter;
 use Yii;
 
@@ -112,17 +114,47 @@ class UsersController extends BackendController
 		$model = $this->findModel($id);
 		$model->setScenario('backendEdit');
 
-		if ($model->load($_POST) && $model->save()) {
-			if (isset($_POST[$model->formName()]['password']) && !empty($_POST[$model->formName()]['password'])) {
+		if ($model->load($_POST)) {
 
-				$model->setScenario('resetPassword');
-				$model->password = $_POST[$model->formName()]['password'];
-				if ($model->save()) {
-					Yii::$app->getSession()->setFlash('success', Yii::t('rusporting/user', 'Password was changed successfully.'));
-					return $this->redirect(['view', 'id' => $model->id]);
+		    //Checking avatar
+			$avatar = UploadedFile::getInstance($model, 'avatar');
+
+			if ($avatar !== null) {
+				$model->avatar = $avatar;
+
+
+
+				if ($model->validate('avatar')) {
+					$filename = md5($model->id.$model->auth_key).'.'.$avatar->getExtension();
+
+					$url = Yii::getAlias('@frontendUrl/uploads/avatars/'.$filename);
+					$path = Yii::getAlias('@frontend/uploads/avatars');
+					FileHelper::createDirectory($path);
+					if ($avatar->saveAs($path.'/'.$filename)) {
+
+					}
 				}
-			} else
-				return $this->redirect(['view', 'id' => $model->id]);
+
+			} else {
+				$model->avatar = null;
+			}
+			var_dump($model->errors);
+			exit();
+
+
+			if ($model->save()) {
+
+				if (isset($_POST[$model->formName()]['password']) && !empty($_POST[$model->formName()]['password'])) {
+
+					$model->setScenario('resetPassword');
+					$model->password = $_POST[$model->formName()]['password'];
+					if ($model->save()) {
+						Yii::$app->getSession()->setFlash('success', Yii::t('rusporting/user', 'Password was changed successfully.'));
+						return $this->redirect(['view', 'id' => $model->id]);
+					}
+				} else
+					return $this->redirect(['view', 'id' => $model->id]);
+			}
 		}
 		return $this->render('update', [
 			'model' => $model,

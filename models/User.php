@@ -221,7 +221,9 @@ class User extends ActiveRecord implements IdentityInterface
 			['email', 'exist', 'message' => Yii::t('rusporting/user', 'There is no user with such email.'), 'on' => 'requestPasswordResetToken'],
 
 			['password', 'required'],
-			['password', 'string', 'min' => 4]
+			['password', 'string', 'min' => 4],
+
+			['avatar', 'image', 'minWidth' => 64, 'minHeight' => 64, 'maxWidth' => 150, 'maxHeight' => 150]
 		];
 	}
 
