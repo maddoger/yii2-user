@@ -76,6 +76,7 @@ return array (
   'Password Hash' => '',
   'Password Reset Token' => '',
   'Password reset for {name}' => '',
+  'Password was changed successfully.' => '',
   'Patronymic' => '',
   'Please choose your new password:' => '',
   'Please fill out your email. A link to reset password will be sent there.' => '',

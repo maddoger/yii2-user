@@ -112,7 +112,7 @@ class UserModule extends Module
 	 */
 	public function getConfigurationModel()
 	{
-		return null;
+		return parent::getConfigurationModel();
 	}
 
 	/**

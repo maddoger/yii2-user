@@ -123,7 +123,7 @@ return array (
   'Users list' => 'Список пользователей',
   'Users manager' => 'Менеджер пользователей',
   'Verification code' => 'Код проверки',
-  'View' => 'Просмотр',
+  'View' => '@@Просмотр@@',
   'View roles' => 'Просмотр ролей',
   'View users' => 'Просмотр пользователей',
   'Vk Data' => '',

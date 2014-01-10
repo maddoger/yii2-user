@@ -65,7 +65,8 @@ use rusporting\user\models\User;
 					<?php
 						$field =  $form->field($model, 'avatar');
 						$field->parts['{input}'] =
-							'<label>'.Html::checkbox('deleteAvatar') . '&nbsp;'.Yii::t('rusporting/admin', 'Delete').'</label><br />'
+							'<label>'.Html::checkbox('deleteAvatar') . '&nbsp;'.Yii::t('rusporting/user',
+								'Delete').'</label><br />'
 					. \rusporting\admin\widgets\FileInput::widget(
 							[
 								'name' => 'avatar',
