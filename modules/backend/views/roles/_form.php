@@ -16,6 +16,11 @@ use rusporting\user\modules\backend\models\AuthItem;
 
 	<?php $form = ActiveForm::begin(); ?>
 
+		<div class="form-group">
+			<?= Html::submitButton($model->isNewRecord ? Yii::t('rusporting/user', 'Create') : Yii::t('rusporting/user', 'Update'),
+				['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+		</div>
+
 		<?= $form->field($model, 'name')->textInput(['maxlength' => 64]) ?>
 
 		<?= $form->field($model, 'type')->dropDownList(AuthItem::getTypeValues(), ['prompt' => Yii::t('rusporting/user', 'Choose item type')]); ?>

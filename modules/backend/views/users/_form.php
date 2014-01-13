@@ -25,6 +25,14 @@ use rusporting\user\models\User;
 	); ?>
 
 	<div class="row">
+
+		<div class="row">
+			<div class="col-lg-2"></div>
+			<div class="col-lg-10">
+				<?= Html::submitButton($model->isNewRecord ? Yii::t('rusporting/user', 'Create') : Yii::t('rusporting/user', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+			</div>
+		</div>
+
 		<div class="col-md-12">
 			<ul class="nav nav-tabs" style="margin-bottom: 15px;">
 				<li class="active"><a href="#auth" data-toggle="tab"><?= Yii::t('rusporting/user', 'Authentication') ?></a></li>
