@@ -24,14 +24,11 @@ use rusporting\user\models\User;
 		]
 	); ?>
 
-	<div class="row">
+	<p>
+		<?= Html::submitButton($model->isNewRecord ? Yii::t('rusporting/user', 'Create') : Yii::t('rusporting/user', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+	</p>
 
-		<div class="row">
-			<div class="col-lg-2"></div>
-			<div class="col-lg-10">
-				<?= Html::submitButton($model->isNewRecord ? Yii::t('rusporting/user', 'Create') : Yii::t('rusporting/user', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-			</div>
-		</div>
+	<div class="row">
 
 		<div class="col-md-12">
 			<ul class="nav nav-tabs" style="margin-bottom: 15px;">
@@ -66,7 +63,7 @@ use rusporting\user\models\User;
 					<?= $form->field($model, 'nick_name')->textInput(['maxlength' => 50]) ?>
 
 					<?= $form->field($model, 'date_of_birth')->textInput(['class' => 'form-control date-editor',
-						'value' => Yii::$app->getFormatter()->format($model->date_of_birth, 'date')]) ?>
+						'value' => $model->date_of_birth !== null ? Yii::$app->getFormatter()->format($model->date_of_birth, 'date') : '']) ?>
 
 					<?= $form->field($model, 'gender')->dropDownList(User::getGenderItems()) ?>
 
@@ -124,15 +121,14 @@ use rusporting\user\models\User;
 					echo $form->field($model, 'rolesNames')->listBox($items, ['class'=>'form-control select2', 'multiple'=> true, 'prompt' => Yii::t('rusporting/user', 'No roles')]);
 					?>
 				</div>
-				<div class="row">
-					<div class="col-lg-2"></div>
-					<div class="col-lg-10">
-					<?= Html::submitButton($model->isNewRecord ? Yii::t('rusporting/user', 'Create') : Yii::t('rusporting/user', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
+
+	<p>
+		<?= Html::submitButton($model->isNewRecord ? Yii::t('rusporting/user', 'Create') : Yii::t('rusporting/user', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+	</p>
+
 
 	<?php ActiveForm::end(); ?>
 
