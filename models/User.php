@@ -341,6 +341,7 @@ class User extends ActiveRecord implements IdentityInterface
 			'last_visit_time' => Yii::t('rusporting/user', 'Last visit time'),
 			'create_time' => Yii::t('rusporting/user', 'Create Time'),
 			'update_time' => Yii::t('rusporting/user', 'Update Time'),
+			'rolesNames' => Yii::t('rusporting/user', 'Roles'),
 		];
 	}
 }

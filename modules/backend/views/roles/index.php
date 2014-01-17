@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		'class' => 'grid-view',
 		'columns' => [
 			['class' => 'yii\grid\SerialColumn'],
-
+			'description:ntext',
 			'name',
 			[
 				'value' => function ($model, $index, $widget){
@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				'filter' => AuthItem::getTypeValues(),
 				'attribute' => 'type',
 			],
-			'description:ntext',
+
 
 			['class' => 'yii\grid\ActionColumn'],
 		],

@@ -33,7 +33,7 @@ use rusporting\user\modules\backend\models\AuthItem;
 		foreach ($all as $ar)
 		{
 			if ($ar['name'] != $model->name) {
-				$items[$ar['name']] = $ar['name'].' - '.$ar['description'];
+				$items[$ar['name']] = $ar['description'];
 			}
 		}
 		echo $form->field($model, 'children')->listBox($items, ['class'=>'form-control select2', 'multiple'=> true, 'prompt' => Yii::t('rusporting/user', 'No children')]);

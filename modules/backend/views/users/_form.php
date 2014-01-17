@@ -116,7 +116,7 @@ use rusporting\user\models\User;
 					$items = [];
 					foreach ($all as $ar)
 					{
-						$items[$ar['name']] = $ar['name'].' - '.$ar['description'];
+						$items[$ar['name']] = $ar['description'];
 					}
 					echo $form->field($model, 'rolesNames')->listBox($items, ['class'=>'form-control select2', 'multiple'=> true, 'prompt' => Yii::t('rusporting/user', 'No roles')]);
 					?>

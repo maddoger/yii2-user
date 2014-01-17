@@ -25,6 +25,7 @@ return array (
   'Backend authorization route' => '',
   'Biz rule' => '',
   'Check your email for further instructions.' => '',
+  'Children' => '',
   'Children roles' => '',
   'Choose item type' => '',
   'Create' => '',

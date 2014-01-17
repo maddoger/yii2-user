@@ -51,6 +51,7 @@ class AuthItem extends ActiveRecord
 			'description' => Yii::t('rusporting/user', 'Description'),
 			'biz_rule' => Yii::t('rusporting/user', 'Biz rule'),
 			'data' => Yii::t('rusporting/user', 'Data'),
+			'children' => Yii::t('rusporting/user', 'Children'),
 		];
 	}
 
