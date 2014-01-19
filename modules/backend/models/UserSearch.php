@@ -38,14 +38,14 @@ class UserSearch extends Model
 	public $vk_data;
 	public $status;
 	public $last_visit_time;
-	public $create_time;
-	public $update_time;
+	public $created_at;
+	public $updated_at;
 	public $avatar;
 
 	public function rules()
 	{
 		return [
-			[['id', 'last_visit_time', 'create_time', 'update_time'], 'integer'],
+			[['id', 'last_visit_time', 'created_at', 'updated_at'], 'integer'],
 			[['username', 'email', 'first_name', 'last_name', 'nick_name', 'patronymic', 'short_name', 'full_name', 'date_of_birth', 'gender', 'facebook_uid', 'facebook_name', 'facebook_data', 'twitter_uid', 'twitter_name', 'twitter_data', 'gplus_uid', 'gplus_name', 'gplus_data', 'vk_uid', 'vk_name', 'vk_data', 'status', 'avatar'], 'safe'],
 			[['email_confirmed'], 'boolean'],
 		];
@@ -90,8 +90,8 @@ class UserSearch extends Model
 			'vk_data' => Yii::t('rusporting/user', 'Vk Data'),
 			'status' => Yii::t('rusporting/user', 'Status'),
 			'last_visit_time' => Yii::t('rusporting/user', 'Last visit time'),
-			'create_time' => Yii::t('rusporting/user', 'Create Time'),
-			'update_time' => Yii::t('rusporting/user', 'Update Time'),
+			'ccreated_at => Yii::t('rusporting/user', 'Create Time'),
+			'updated_at' => Yii::t('rusporting/user', 'Update Time'),
 		];
 	}
 
@@ -133,8 +133,8 @@ class UserSearch extends Model
 		$this->addCondition($query, 'vk_data', true);
 		$this->addCondition($query, 'status', true);
 		$this->addCondition($query, 'last_visit_time');
-		$this->addCondition($query, 'create_time');
-		$this->addCondition($query, 'update_time');
+		$this->addCondition($query, 'created_at');
+		$this->addCondition($query, 'updated_at');
 		$this->addCondition($query, 'avatar', true);
 		return $dataProvider;
 	}

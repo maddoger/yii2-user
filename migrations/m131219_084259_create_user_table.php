@@ -61,8 +61,8 @@ class m131219_084259_create_user_table extends \yii\db\Migration
 			'status' => Schema::TYPE_SMALLINT . ' NOT NULL DEFAULT 10',
 
 			'last_visit_time' => Schema::TYPE_INTEGER,
-			'create_time' => Schema::TYPE_INTEGER.' NOT NULL',
-			'update_time' => Schema::TYPE_INTEGER.' NOT NULL',
+			'created_at' => Schema::TYPE_INTEGER.' NOT NULL',
+			'updated_at' => Schema::TYPE_INTEGER.' NOT NULL',
 		], $tableOptions);
 
 		$this->createIndex($this->db->tablePrefix.'user_username_canonical_ux', '{{%user}}', 'username_canonical', true);

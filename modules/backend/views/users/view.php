@@ -80,8 +80,8 @@ $this->params['breadcrumbs'][] = $this->title;
 				'value' => $roles,
 			],
 			'last_visit_time:datetime',
-			'create_time:datetime',
-			'update_time:datetime',
+			'created_at:datetime',
+			'updated_at:datetime',
 			'avatar:image',
 		],
 	]); ?>

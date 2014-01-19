@@ -42,8 +42,8 @@ use yii\web\IdentityInterface;
  * @property string $vk_data
  * @property string $status
  * @property integer $last_visit_time
- * @property integer $create_time
- * @property integer $update_time
+ * @property integer $created_at
+ * @property integer $updated_at
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -63,8 +63,8 @@ class User extends ActiveRecord implements IdentityInterface
 			'timestamp' => [
 				'class' => 'yii\behaviors\AutoTimestamp',
 				'attributes' => [
-					ActiveRecord::EVENT_BEFORE_INSERT => ['create_time', 'update_time'],
-					ActiveRecord::EVENT_BEFORE_UPDATE => 'update_time',
+					ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+					ActiveRecord::EVENT_BEFORE_UPDATE => 'updated_at',
 				],
 			],
 		];
@@ -339,8 +339,8 @@ class User extends ActiveRecord implements IdentityInterface
 			'vk_data' => Yii::t('rusporting/user', 'Vk Data'),
 			'status' => Yii::t('rusporting/user', 'Status'),
 			'last_visit_time' => Yii::t('rusporting/user', 'Last visit time'),
-			'create_time' => Yii::t('rusporting/user', 'Create Time'),
-			'update_time' => Yii::t('rusporting/user', 'Update Time'),
+			'created_at' => Yii::t('rusporting/user', 'Create Time'),
+			'updated_at' => Yii::t('rusporting/user', 'Update Time'),
 			'rolesNames' => Yii::t('rusporting/user', 'Roles'),
 		];
 	}
