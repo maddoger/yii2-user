@@ -166,10 +166,13 @@ class UserModule extends Module
 		return [
 			[
 				'label' => Yii::t('rusporting/user', 'Users'), 'fa' => 'users',
+				'roles' => ['user.read', 'role.read'],
 				//'url' => 'user/user-backend/index',
 				'items' => [
-					['label' => Yii::t('rusporting/user', 'Users list'), 'fa'=>'user', 'url'=> ['/user/users/index'], 'activeUrl'=> ['/user/users/*']],
-					['label' => Yii::t('rusporting/user', 'Roles list'), 'fa'=>'group', 'url'=> ['/user/roles/index'], 'activeUrl'=> ['/user/roles/*']],
+					['label' => Yii::t('rusporting/user', 'Users list'), 'fa'=>'user', 'url'=> ['/user/users/index'],
+						'activeUrl'=> ['/user/users/*'], 'roles' => ['user.read'],],
+					['label' => Yii::t('rusporting/user', 'Roles list'), 'fa'=>'group', 'url'=> ['/user/roles/index'],
+						'activeUrl'=> ['/user/roles/*'], 'roles' => ['role.read']],
 				],
 			]
 		];
