@@ -68,7 +68,7 @@ class AuthItemSearch extends Model
 			return;
 		}
 		if ($partialMatch) {
-			$value = '%' . strtr($value, ['%'=>'\%', '_'=>'\_', '\\'=>'\\\\']) . '%';
+			$value = strtr($value, ['%'=>'\%', '_'=>'\_', '\\'=>'\\\\']);
 			$query->andWhere(['like', $attribute, $value]);
 		} else {
 			$query->andWhere([$attribute => $value]);
