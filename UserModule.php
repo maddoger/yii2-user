@@ -30,6 +30,11 @@ class UserModule extends Module
 	public $returnLogoutUrl = array('/user/login');
 
 	public $superUsers = ['admin'];
+	
+	public $avatarWidth = 150;
+	public $avatarHeight = 150;
+	public $avatarDefault = null;
+	
 
 	protected $hasBackend = true;
 	protected $hasFrontend = true;
@@ -112,7 +117,25 @@ class UserModule extends Module
 	 */
 	public function getConfigurationModel()
 	{
-		return parent::getConfigurationModel();
+		$model = parent::getConfigurationModel();
+		$model->addAttributes([
+
+			'avatarWidth' => ['label' => Yii::t('rusporting/user', 'Avatar width in pixels'),
+				'rules' => [
+					['avatarWidth', 'integer'],
+					['avatarWidth', 'filter', 'filter'=>'intval'],
+				]
+			],
+			'avatarHeight' => ['label' => Yii::t('rusporting/user', 'Avatar height in pixels'),
+				'rules' => [
+					['avatarWidth', 'integer'],
+					['avatarWidth', 'filter', 'filter'=>'intval'],
+				]
+			],
+			'avatarDefault' => ['type' => 'image', 'label' => Yii::t('rusporting/user', 'Default avatar')],
+
+		]);
+		return $model;
 	}
 
 	/**

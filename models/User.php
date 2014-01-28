@@ -59,11 +59,46 @@ class User extends ActiveRecord implements IdentityInterface
 
 	public function behaviors()
 	{
+		$folder = '/uploads/avatars';
+		$module = Yii::$app->getModule('user');
+
 		return [
+			'avatar' => [
+				'class' => 'rusporting\core\behaviors\ImageUpload',
+				'attribute' => 'avatar',
+				'generateName' => true,
+				'types' => 'jpg, png, bmp, tiff',
+				// folder to store images
+				'directory' => Yii::getAlias('@frontendPath'.$folder),
+				'url' => Yii::getAlias('@frontendUrl'.$folder),
+				// image versions
+				'versions' => array(
+					'avatar' => array(
+						'centeredpreview' => array($module->avatarWidth, $module->avatarHeight),
+					),
+				)
+			],
+
 			'timestamp' => [
 				'class' => 'rusporting\core\behaviors\AutoTimestamp',
 			],
 		];
+	}
+
+	/**
+	 * @return \rusporting\core\behaviors\ImageUpload
+	 */
+	public function getAvatarBehavior()
+	{
+		return $this->getBehavior('avatar');
+	}
+
+	/**
+	 * @return mixed|null|string
+	 */
+	public function getAvatarSrc()
+	{
+		return $this->getAvatarBehavior()->getUrl('avatar');
 	}
 
 	/**

@@ -82,7 +82,11 @@ $this->params['breadcrumbs'][] = $this->title;
 			'last_visit_time:datetime',
 			'created_at:datetime',
 			'updated_at:datetime',
-			'avatar:image',
+			[
+				'name' => 'avatar',
+				'format' => 'image',
+				'value' => $model->getAvatarSrc(),
+			],
 		],
 	]); ?>
 

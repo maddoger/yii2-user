@@ -10,6 +10,8 @@ use rusporting\user\models\User;
  * @var rusporting\user\models\User $model
  * @var yii\widgets\ActiveForm $form
  */
+
+$module = Yii::$app->getModule('user');
 ?>
 
 <div class="user-form">
@@ -62,25 +64,21 @@ use rusporting\user\models\User;
 
 					<?= $form->field($model, 'nick_name')->textInput(['maxlength' => 50]) ?>
 
-					<?= $form->field($model, 'date_of_birth')->textInput(['class' => 'form-control date-editor',
-						'value' => $model->date_of_birth !== null ? Yii::$app->getFormatter()->format($model->date_of_birth, 'date') : '']) ?>
+					<?= $form->field($model, 'date_of_birth')->widget('rusporting\admin\widgets\DateEditor',
+						[
+							'options' => [
+								'value' => $model->date_of_birth !== null ? date('d.m.Y', strtotime($model->date_of_birth)) : '',
+							]
+						]) ?>
 
 					<?= $form->field($model, 'gender')->dropDownList(User::getGenderItems()) ?>
 
 					<?php
-						$field =  $form->field($model, 'avatar');
-						$field->parts['{input}'] =
-							'<label>'.Html::checkbox('deleteAvatar') . '&nbsp;'.Yii::t('rusporting/user',
-								'Delete').'</label><br />'
-					. \rusporting\admin\widgets\FileInput::widget(
-							[
-								'name' => 'avatar',
-								'value' => Yii::getAlias('@frontendUrl'.$model->avatar),
-								'style' => \rusporting\admin\widgets\FileInput::STYLE_IMAGE,
-								'width'=>150,
-								'height'=>150
-							]);
-						echo $field;
+						echo $form->field($model, 'avatar')->widget('rusporting\admin\widgets\ImageInput', [
+							'width' => $module->avatarWidth,
+							'height' => $module->avatarHeight,
+							'preview' => $model->getAvatarSrc(),
+						]);
 					?>
 
 

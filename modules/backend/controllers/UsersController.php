@@ -96,13 +96,18 @@ class UsersController extends BackendController
 		$model = new User;
 		$model->setScenario('backendCreate');
 
-		if ($model->load($_POST) && $model->save()) {
-			return $this->redirect(['view', 'id' => $model->id]);
-		} else {
-			return $this->render('create', [
+		if ($model->load($_POST)) {
+			if (!empty($model->date_of_birth)) {
+				$model->setDateAttribute('date_of_birth', $model->date_of_birth);
+			}
+			if ($model->save()) {
+				return $this->redirect(['view', 'id' => $model->id]);
+			}
+		}
+
+		return $this->render('create', [
 				'model' => $model,
 			]);
-		}
 	}
 
 	/**
@@ -118,41 +123,8 @@ class UsersController extends BackendController
 
 		if ($model->load($_POST)) {
 
-
-			if (isset($_POST['deleteAvatar']) && $_POST['deleteAvatar']==1) {
-				//Delete file
-				/*if ($model->avatar) {
-					$url = $model->avatar;
-					$path = Yii::getAlias('@frontendPath'.$url);
-					if (file_exists($path)) {
-						unlink($path);
-					}
-				}*/
-				$model->avatar = null;
-			} else {
-
-				//Checking avatar
-				$avatar = UploadedFile::getInstanceByName('avatar');
-
-				if ($avatar !== null && $avatar->size>0 && $avatar->error == 0) {
-
-					$filename = md5($model->id.$model->auth_key).'.'.$avatar->getExtension();
-					$url = Yii::getAlias('@frontendUrl/uploads/avatars/'.$filename);
-					$path = Yii::getAlias('@frontendPath/uploads/avatars');
-
-					FileHelper::createDirectory($path);
-					$path = $path.'/'.$filename;
-
-					if ($avatar->saveAs($path)) {
-						$image = Yii::$app->image->load($path);
-						if ($image->width>150 && $image->height>150) {
-							$image->resize(150, 150, Yii\image\drivers\Image::HEIGHT);
-							$image->save($path, 100);
-						}
-						$model->avatar = $url;
-					}
-
-				}
+			if (!empty($model->date_of_birth)) {
+				$model->setDateAttribute('date_of_birth', $model->date_of_birth);
 			}
 
 			if ($model->save()) {

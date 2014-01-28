@@ -90,7 +90,7 @@ class UserSearch extends Model
 			'vk_data' => Yii::t('rusporting/user', 'Vk Data'),
 			'status' => Yii::t('rusporting/user', 'Status'),
 			'last_visit_time' => Yii::t('rusporting/user', 'Last visit time'),
-			'ccreated_at => Yii::t('rusporting/user', 'Create Time'),
+			'created_at' => Yii::t('rusporting/user', 'Create Time'),
 			'updated_at' => Yii::t('rusporting/user', 'Update Time'),
 		];
 	}
