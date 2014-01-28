@@ -39,6 +39,7 @@ return array (
   'Create role' => 'Создать роль',
   'Data' => 'Данные',
   'Date Of Birth' => 'Дата рождения',
+  'Default avatar' => '',
   'Delete' => 'Удалить',
   'Delete roles' => 'Удалить роль',
   'Delete users' => 'Удалить пользователя',

@@ -17,7 +17,7 @@ use rusporting\user\modules\backend\models\AuthItem;
 	<?php $form = ActiveForm::begin(); ?>
 
 		<div class="form-group">
-			<?= Html::submitButton($model->isNewRecord ? Yii::t('rusporting/user', 'Create') : Yii::t('rusporting/user', 'Update'),
+			<?= Html::submitButton($model->isNewRecord ? Yii::t('rusporting/user', 'Create') : Yii::t('rusporting/user', 'Save'),
 				['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 		</div>
 
@@ -45,7 +45,7 @@ use rusporting\user\modules\backend\models\AuthItem;
 		<?= $form->field($model, 'data')->textarea(['rows' => 2]) ?>
 
 		<div class="form-group">
-			<?= Html::submitButton($model->isNewRecord ? Yii::t('rusporting/user', 'Create') : Yii::t('rusporting/user', 'Update'),
+			<?= Html::submitButton($model->isNewRecord ? Yii::t('rusporting/user', 'Create') : Yii::t('rusporting/user', 'Save'),
 				['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 		</div>
 
