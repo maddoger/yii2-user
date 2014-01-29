@@ -6,6 +6,9 @@ use Yii;
 use yii\web\User as BaseWebUser;
 use yii\db\Expression;
 
+/**
+ * @property \rusporting\user\models\User $identity
+ */
 class WebUser extends BaseWebUser {
 
 	public $identityClass = 'rusporting\user\models\User';
@@ -35,9 +38,8 @@ class WebUser extends BaseWebUser {
 		parent::init();
 
 		if (!$this->getIsGuest()) {
-			$this->identity->setAttribute('last_visit_time', time());
+			$this->identity->updateLastVisitTime();
 			// $this->identity->setAttribute('login_ip', ip2long(\Yii::$app->getRequest()->getUserIP()));
-			$this->identity->save(false);
 		}
 	}
 
@@ -47,9 +49,7 @@ class WebUser extends BaseWebUser {
 	protected function afterLogin($identity, $cookieBased)
 	{
 		parent::afterLogin($identity, $cookieBased);
-		$this->identity->setAttribute('last_visit_time', time());
-		// $this->identity->setAttribute('login_ip', ip2long(\Yii::$app->getRequest()->getUserIP()));
-		$this->identity->save(false);
+		$this->identity->updateLastVisitTime();
 	}
 
 	/**
