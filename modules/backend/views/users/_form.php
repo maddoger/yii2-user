@@ -64,12 +64,7 @@ $module = Yii::$app->getModule('user');
 
 					<?= $form->field($model, 'nick_name')->textInput(['maxlength' => 50]) ?>
 
-					<?= $form->field($model, 'date_of_birth')->widget('rusporting\admin\widgets\DateEditor',
-						[
-							'options' => [
-								'value' => $model->date_of_birth !== null ? date('d.m.Y', strtotime($model->date_of_birth)) : '',
-							]
-						]) ?>
+					<?= $form->field($model, 'date_of_birth')->widget('rusporting\admin\widgets\DateEditor') ?>
 
 					<?= $form->field($model, 'gender')->dropDownList(User::getGenderItems()) ?>
 
