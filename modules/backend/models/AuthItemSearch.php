@@ -46,11 +46,13 @@ class AuthItemSearch extends Model
 		$dataProvider = new ActiveDataProvider([
 			'query' => $query,
 		]);
-		$query->orderBy('name');
 
 		if (!($this->load($params) && $this->validate())) {
 			$this->addCondition($query, 'type');
 			return $dataProvider;
+		}
+		if (count($query->orderBy) == 0) {
+			$query->addOrderBy('name');
 		}
 
 		$this->addCondition($query, 'name', true);
