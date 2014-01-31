@@ -103,10 +103,10 @@ class UserSearch extends Model
 		]);
 
 		if (!($this->load($params) && $this->validate())) {
+			if (count($query->orderBy) == 0) {
+				$query->addOrderBy('username');
+			}
 			return $dataProvider;
-		}
-		if (count($query->orderBy) == 0) {
-			$query->addOrderBy('username');
 		}
 
 		$this->addCondition($query, 'id');
