@@ -30,6 +30,7 @@ return array (
   'Children' => 'Дочерние роли',
   'Children roles' => 'Дочерние роли',
   'Choose item type' => 'Выберите тип',
+  'Choose roles' => 'Выберите роли',
   'Create' => 'Создать',
   'Create Time' => 'Дата создания',
   'Create User' => 'Создать пользователя',

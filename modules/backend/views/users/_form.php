@@ -111,7 +111,18 @@ $module = Yii::$app->getModule('user');
 					{
 						$items[$ar['name']] = $ar['description'];
 					}
-					echo $form->field($model, 'rolesNames')->listBox($items, ['class'=>'form-control select2', 'multiple'=> true, 'prompt' => Yii::t('rusporting/user', 'No roles')]);
+
+					echo $form->field($model, 'rolesNames')->widget('rusporting\admin\widgets\Select2', [
+						'data' => $items,
+						'options' => [
+							'multiple' => true,
+							'prompt' => Yii::t('rusporting/user', 'Choose roles'),
+						],
+						'pluginOptions' => [
+							'allowClear' => true,
+							'typeholder' => Yii::t('rusporting/user', 'Choose roles'),
+						],
+					]);
 					?>
 				</div>
 			</div>
