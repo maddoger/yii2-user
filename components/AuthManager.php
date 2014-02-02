@@ -10,11 +10,11 @@ class AuthManager extends DbManager
 	public $assignmentTable = null;
 
 	/**
-	 * @var string the name of the table storing authorization items. Defaults to 'tbl_auth_item'.
+	 * @var string the name of the table storing authorization items. Defaults to $this->getDb()->tablePrefix.'auth_item'.
 	 */
 	public $itemTable = null;
 	/**
-	 * @var string the name of the table storing authorization item hierarchy. Defaults to 'tbl_auth_item_child'.
+	 * @var string the name of the table storing authorization item hierarchy. Defaults to $this->getDb()->tablePrefix.'auth_item_child'.
 	 */
 	public $itemChildTable = null;
 
