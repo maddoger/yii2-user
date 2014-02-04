@@ -97,9 +97,9 @@ class UsersController extends BackendController
 		$model->setScenario('backendCreate');
 
 		if ($model->load($_POST)) {
-			if (!empty($model->date_of_birth)) {
-				$model->setDateAttribute('date_of_birth', $model->date_of_birth);
-			}
+
+			$model->setDateAttribute('date_of_birth', $model->date_of_birth);
+
 			if ($model->save()) {
 				return $this->redirect(['view', 'id' => $model->id]);
 			}
