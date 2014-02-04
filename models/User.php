@@ -205,7 +205,7 @@ class User extends ActiveRecord implements IdentityInterface
 
 	public function setRolesNames($roles)
 	{
-		AuthAssignment::find(['user_id' => $this->id])->delete();
+		AuthAssignment::deleteAll(['user_id' => $this->id]);
 		if ($roles) {
 			foreach ($roles as $role)	{
 				$model = new AuthAssignment();

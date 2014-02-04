@@ -29,7 +29,10 @@ class UserModule extends Module
 	public $returnUrl = array('/');
 	public $returnLogoutUrl = array('/user/login');
 
-	public $superUsers = ['admin'];
+	/**
+	 * @var string[] login list of superusers
+	 */
+	public $superUsers = [];
 	
 	public $avatarWidth = 150;
 	public $avatarHeight = 150;
@@ -192,9 +195,9 @@ class UserModule extends Module
 				'roles' => ['user.read', 'role.read'],
 				//'url' => 'user/user-backend/index',
 				'items' => [
-					['label' => Yii::t('rusporting/user', 'Users list'), 'fa'=>'user', 'url'=> ['/user/users/index'],
+					['label' => Yii::t('rusporting/user', 'Users'), 'fa'=>'user', 'url'=> ['/user/users/index'],
 						'activeUrl'=> ['/user/users/*'], 'roles' => ['user.read'],],
-					['label' => Yii::t('rusporting/user', 'Roles list'), 'fa'=>'group', 'url'=> ['/user/roles/index'],
+					['label' => Yii::t('rusporting/user', 'Roles'), 'fa'=>'group', 'url'=> ['/user/roles/index'],
 						'activeUrl'=> ['/user/roles/*'], 'roles' => ['role.read']],
 				],
 			]

@@ -46,7 +46,7 @@ $module = Yii::$app->getModule('user');
 
 					<?= $form->field($model, 'username')->textInput(['maxlength' => 255]) ?>
 
-					<?= $form->field($model, 'password')->passwordInput(['placeholder'=>'New password', 'maxlength' => 255, 'autocomplete'=>'off']) ?>
+					<?= $form->field($model, 'password')->passwordInput(['placeholder'=> Yii::t('rusporting/user', 'New password'), 'maxlength' => 255, 'autocomplete'=>'off']) ?>
 
 					<?= $form->field($model, 'email')->textInput(['maxlength' => 255]) ?>
 
