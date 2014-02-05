@@ -120,7 +120,7 @@ $module = Yii::$app->getModule('user');
 						],
 						'pluginOptions' => [
 							'allowClear' => true,
-							'typeholder' => Yii::t('rusporting/user', 'Choose roles'),
+							'placeholder' => Yii::t('rusporting/user', 'Choose roles'),
 						],
 					]);
 					?>
