@@ -34,7 +34,7 @@ class UserController extends Controller
 			}
 
 			$version = Yii::getVersion();
-			echo "maddoger User Creation tool (based on Yii v{$version})\n\n";
+			echo "Maddoger`s User Creation tool (based on Yii v{$version})\n\n";
 			return true;
 		} else {
 			return false;

@@ -2,7 +2,7 @@
 /**
  * @author Vitaliy Syrchikov <maddoger@gmail.com>
  * @link http://syrchikov.name/
- * @copyright Copyright (c) 2013-2014 maddoger Inc.
+ * @copyright Copyright (c) 2013-2014 Vitaliy Syrchikov
  * @since 18.12.13
  */
 
@@ -58,13 +58,14 @@ class UserModule extends Module
 		//Console
 		if (Yii::$app instanceof \yii\console\Application) {
 			$this->controllerNamespace = 'maddoger\user\console\controllers';
+			$this->setControllerPath('@maddoger/user/console/controllers');
 		}
 
-		Yii::$app->on(User::EVENT_AFTER_LOGIN, function ($event) {
+		/*Yii::$app->on(User::EVENT_AFTER_LOGIN, function ($event) {
 			if ($event->identity) {
 				$event->identity->updateLastVisitTime();
 			}
-		});
+		});*/
 
 		//register translation messages from module
 		//so no need do add to config/main.php
