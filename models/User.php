@@ -306,7 +306,7 @@ class User extends ActiveRecord implements IdentityInterface
 			if ($this->isNewRecord || isset($dirty['username'])) $this->username_canonical = $this->canonicalize($this->username);
 
 			//Name update
-			$dirtyNames = $this->getDirtyAttributes(['first_name', 'last_name', 'nick_name', 'patronymic']);
+			$dirtyNames = $this->getDirtyAttributes(['first_name', 'last_name', 'nick_name', 'patronymic', 'username']);
 			if (count($dirtyNames)>0) {
 				if (!empty($this->first_name) && !empty($this->last_name)) {
 					$this->short_name = trim($this->first_name).' '.trim($this->last_name);
