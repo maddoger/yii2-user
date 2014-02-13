@@ -112,17 +112,23 @@ $module = Yii::$app->getModule('user');
 						$items[$ar['name']] = $ar['description'];
 					}
 
-					echo $form->field($model, 'rolesNames')->widget('maddoger\admin\widgets\Select2', [
-						'data' => $items,
-						'options' => [
-							'multiple' => true,
-							'prompt' => Yii::t('maddoger/user', 'Choose roles'),
-						],
-						'pluginOptions' => [
-							'allowClear' => true,
-							'placeholder' => Yii::t('maddoger/user', 'Choose roles'),
-						],
-					]);
+					if ($items) {
+						echo $form->field($model, 'rolesNames')->widget('maddoger\admin\widgets\Select2', [
+							'data' => $items,
+							'options' => [
+								'multiple' => true,
+								'prompt' => Yii::t('maddoger/user', 'Choose roles'),
+							],
+							'pluginOptions' => [
+								'allowClear' => true,
+								'placeholder' => Yii::t('maddoger/user', 'Choose roles'),
+							],
+						]);
+					} else {
+						$f = $form->field($model, 'rolesNames');
+						$f->parts['{input}'] = '<p class="form-control-static">'.Yii::t('maddoger/user', 'No roles').'</p>';
+						echo $f;
+					}
 					?>
 				</div>
 			</div>

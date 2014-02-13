@@ -74,7 +74,7 @@ return array (
   'Nick Name' => 'Прозвище',
   'No' => 'Нет',
   'No children' => 'Нет дочерних элементов',
-  'No roles' => 'Но ролей',
+  'No roles' => 'Нет ролей',
   'Not known' => 'Неизвестно',
   'Only letters, numbers and comma are acceptable.' => 'Можно использовать только буквы, цифры и точку.',
   'Operation' => 'Операция',
