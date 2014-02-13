@@ -1,6 +1,6 @@
 <?php
 
-namespace rusporting\user\modules\backend;
+namespace maddoger\user\modules\backend;
 
 use yii\base\Module;
 

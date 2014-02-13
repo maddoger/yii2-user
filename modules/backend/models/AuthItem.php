@@ -1,11 +1,11 @@
 <?php
 
-namespace rusporting\user\modules\backend\models;
+namespace maddoger\user\modules\backend\models;
 
 use yii\rbac\Item;
 use Yii;
-use rusporting\user\models\User;
-use rusporting\core\ActiveRecord;
+use maddoger\user\models\User;
+use maddoger\core\ActiveRecord;
 
 /**
  * This is the model class for table "public.tbl_auth_item".
@@ -33,7 +33,7 @@ class AuthItem extends ActiveRecord
 	{
 		return [
 			[['name', 'type'], 'required'],
-			['name', 'match', 'pattern' => '/^[\da-zA-Z\.\-_]+$/', 'message' => Yii::t('rusporting/user', 'Only letters, numbers and comma are acceptable.')],
+			['name', 'match', 'pattern' => '/^[\da-zA-Z\.\-_]+$/', 'message' => Yii::t('maddoger/user', 'Only letters, numbers and comma are acceptable.')],
 			[['type'], 'integer'],
 			[['description', 'data', 'biz_rule'], 'string'],
 			[['name'], 'string', 'max' => 64]
@@ -46,12 +46,12 @@ class AuthItem extends ActiveRecord
 	public function attributeLabels()
 	{
 		return [
-			'name' =>  Yii::t('rusporting/user', 'Role name'),
-			'type' =>  Yii::t('rusporting/user', 'Type'),
-			'description' => Yii::t('rusporting/user', 'Description'),
-			'biz_rule' => Yii::t('rusporting/user', 'Biz rule'),
-			'data' => Yii::t('rusporting/user', 'Data'),
-			'children' => Yii::t('rusporting/user', 'Children'),
+			'name' =>  Yii::t('maddoger/user', 'Role name'),
+			'type' =>  Yii::t('maddoger/user', 'Type'),
+			'description' => Yii::t('maddoger/user', 'Description'),
+			'biz_rule' => Yii::t('maddoger/user', 'Biz rule'),
+			'data' => Yii::t('maddoger/user', 'Data'),
+			'children' => Yii::t('maddoger/user', 'Children'),
 		];
 	}
 
@@ -90,9 +90,9 @@ class AuthItem extends ActiveRecord
 	public static function getTypeValues()
 	{
 		return [
-			Item::TYPE_OPERATION => Yii::t('rusporting/user', 'Operation'),
-			Item::TYPE_TASK => Yii::t('rusporting/user', 'Task'),
-			Item::TYPE_ROLE => Yii::t('rusporting/user', 'Role')
+			Item::TYPE_OPERATION => Yii::t('maddoger/user', 'Operation'),
+			Item::TYPE_TASK => Yii::t('maddoger/user', 'Task'),
+			Item::TYPE_ROLE => Yii::t('maddoger/user', 'Role')
 		];
 	}
 }

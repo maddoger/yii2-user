@@ -1,7 +1,7 @@
 <?php
-use rusporting\user\BackendAuthAsset;
+use maddoger\user\BackendAuthAsset;
 use yii\helpers\Html;
-use rusporting\user\widgets\Alert;
+use maddoger\user\widgets\Alert;
 
 /**
  * @var \yii\web\View $this

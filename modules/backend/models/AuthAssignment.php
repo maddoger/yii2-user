@@ -1,8 +1,8 @@
 <?php
 
-namespace rusporting\user\modules\backend\models;
+namespace maddoger\user\modules\backend\models;
 
-use rusporting\user\models\User;
+use maddoger\user\models\User;
 
 /**
  * This is the model class for table "public.tbl_auth_assignment".
@@ -15,7 +15,7 @@ use rusporting\user\models\User;
  * @property AuthItem $itemName
  * @property User $user
  */
-class AuthAssignment extends \rusporting\core\ActiveRecord
+class AuthAssignment extends \maddoger\core\ActiveRecord
 {
 	/**
 	 * @inheritdoc

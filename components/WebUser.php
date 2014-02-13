@@ -1,33 +1,33 @@
 <?php
 
-namespace rusporting\user\components;
+namespace maddoger\user\components;
 
 use Yii;
 use yii\web\User as BaseWebUser;
 use yii\db\Expression;
 
 /**
- * @property \rusporting\user\models\User $identity
+ * @property \maddoger\user\models\User $identity
  */
 class WebUser extends BaseWebUser {
 
-	public $identityClass = 'rusporting\user\models\User';
+	public $identityClass = 'maddoger\user\models\User';
 	//public $loginUrl = ['/user/login'];
 
 	public function init()
 	{
 		Yii::$app->setComponents([
 			'session' => [
-				'class' => 'rusporting\user\components\Session',
+				'class' => 'maddoger\user\components\Session',
 			],
 			'authManager' => [
-				'class' => 'rusporting\user\components\AuthManager',
+				'class' => 'maddoger\user\components\AuthManager',
 				'defaultRoles' => ['guest'],
 			],
 		]);
 
 		/**
-		 * @var \rusporting\user\UserModule $module
+		 * @var \maddoger\user\UserModule $module
 		 */
 		$module = Yii::$app->getModule('user');
 		if ($module) {

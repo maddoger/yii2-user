@@ -1,10 +1,10 @@
 <?php
 
-namespace rusporting\user\modules\backend\models;
+namespace maddoger\user\modules\backend\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use rusporting\user\modules\backend\models\AuthItem;
+use maddoger\user\modules\backend\models\AuthItem;
 use yii\rbac\Item;
 
 /**

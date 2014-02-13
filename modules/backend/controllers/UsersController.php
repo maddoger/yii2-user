@@ -1,11 +1,11 @@
 <?php
 
-namespace rusporting\user\modules\backend\controllers;
+namespace maddoger\user\modules\backend\controllers;
 
-use rusporting\user\models\User;
-use rusporting\user\modules\backend\models\AuthAssignment;
-use rusporting\user\modules\backend\models\UserSearch;
-use rusporting\core\BackendController;
+use maddoger\user\models\User;
+use maddoger\user\modules\backend\models\AuthAssignment;
+use maddoger\user\modules\backend\models\UserSearch;
+use maddoger\core\BackendController;
 use yii\helpers\FileHelper;
 use yii\image\ImageDriver;
 use yii\validators\ImageValidator;
@@ -134,7 +134,7 @@ class UsersController extends BackendController
 					$model->setScenario('resetPassword');
 					$model->password = $_POST[$model->formName()]['password'];
 					if ($model->save()) {
-						Yii::$app->getSession()->setFlash('success', Yii::t('rusporting/user', 'Password was changed successfully.'));
+						Yii::$app->getSession()->setFlash('success', Yii::t('maddoger/user', 'Password was changed successfully.'));
 						return $this->redirect(['view', 'id' => $model->id]);
 					}
 				} else
@@ -170,7 +170,7 @@ class UsersController extends BackendController
 		if (($model = User::find($id)) !== null) {
 			return $model;
 		} else {
-			throw new NotFoundHttpException(\Yii::t('rusporting/user', 'The requested user does not exist.'));
+			throw new NotFoundHttpException(\Yii::t('maddoger/user', 'The requested user does not exist.'));
 		}
 	}
 }

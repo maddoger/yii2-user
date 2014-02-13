@@ -1,10 +1,10 @@
 <?php
 
-namespace rusporting\user\modules\backend\models;
+namespace maddoger\user\modules\backend\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use rusporting\user\models\User;
+use maddoger\user\models\User;
 use Yii;
 
 /**
@@ -57,41 +57,41 @@ class UserSearch extends Model
 	public function attributeLabels()
 	{
 		return [
-			'id' => Yii::t('rusporting/user', 'ID'),
-			'username' => Yii::t('rusporting/user', 'Username'),
-			'username_canonical' => Yii::t('rusporting/user', 'Username Canonical'),
-			'auth_key' => Yii::t('rusporting/user', 'Auth Key'),
-			'password' => Yii::t('rusporting/user', 'Password'),
-			'password_hash' => Yii::t('rusporting/user', 'Password Hash'),
-			'password_reset_token' => Yii::t('rusporting/user', 'Password Reset Token'),
-			'email' => Yii::t('rusporting/user', 'Email'),
-			'email_canonical' => Yii::t('rusporting/user', 'Email Canonical'),
-			'email_confirmed' => Yii::t('rusporting/user', 'Email Confirmed'),
-			'first_name' => Yii::t('rusporting/user', 'First Name'),
-			'last_name' => Yii::t('rusporting/user', 'Last Name'),
-			'nick_name' => Yii::t('rusporting/user', 'Nick Name'),
-			'patronymic' => Yii::t('rusporting/user', 'Patronymic'),
-			'short_name' => Yii::t('rusporting/user', 'Short Name'),
-			'full_name' => Yii::t('rusporting/user', 'Full Name'),
-			'avatar' => Yii::t('rusporting/user', 'Avatar'),
-			'date_of_birth' => Yii::t('rusporting/user', 'Date Of Birth'),
-			'gender' => Yii::t('rusporting/user', 'Gender'),
-			'facebook_uid' => Yii::t('rusporting/user', 'Facebook Uid'),
-			'facebook_name' => Yii::t('rusporting/user', 'Facebook Name'),
-			'facebook_data' => Yii::t('rusporting/user', 'Facebook Data'),
-			'twitter_uid' => Yii::t('rusporting/user', 'Twitter Uid'),
-			'twitter_name' => Yii::t('rusporting/user', 'Twitter Name'),
-			'twitter_data' => Yii::t('rusporting/user', 'Twitter Data'),
-			'gplus_uid' => Yii::t('rusporting/user', 'Gplus Uid'),
-			'gplus_name' => Yii::t('rusporting/user', 'Gplus Name'),
-			'gplus_data' => Yii::t('rusporting/user', 'Gplus Data'),
-			'vk_uid' => Yii::t('rusporting/user', 'Vk Uid'),
-			'vk_name' => Yii::t('rusporting/user', 'Vk Name'),
-			'vk_data' => Yii::t('rusporting/user', 'Vk Data'),
-			'status' => Yii::t('rusporting/user', 'Status'),
-			'last_visit_time' => Yii::t('rusporting/user', 'Last visit time'),
-			'created_at' => Yii::t('rusporting/user', 'Create Time'),
-			'updated_at' => Yii::t('rusporting/user', 'Update Time'),
+			'id' => Yii::t('maddoger/user', 'ID'),
+			'username' => Yii::t('maddoger/user', 'Username'),
+			'username_canonical' => Yii::t('maddoger/user', 'Username Canonical'),
+			'auth_key' => Yii::t('maddoger/user', 'Auth Key'),
+			'password' => Yii::t('maddoger/user', 'Password'),
+			'password_hash' => Yii::t('maddoger/user', 'Password Hash'),
+			'password_reset_token' => Yii::t('maddoger/user', 'Password Reset Token'),
+			'email' => Yii::t('maddoger/user', 'Email'),
+			'email_canonical' => Yii::t('maddoger/user', 'Email Canonical'),
+			'email_confirmed' => Yii::t('maddoger/user', 'Email Confirmed'),
+			'first_name' => Yii::t('maddoger/user', 'First Name'),
+			'last_name' => Yii::t('maddoger/user', 'Last Name'),
+			'nick_name' => Yii::t('maddoger/user', 'Nick Name'),
+			'patronymic' => Yii::t('maddoger/user', 'Patronymic'),
+			'short_name' => Yii::t('maddoger/user', 'Short Name'),
+			'full_name' => Yii::t('maddoger/user', 'Full Name'),
+			'avatar' => Yii::t('maddoger/user', 'Avatar'),
+			'date_of_birth' => Yii::t('maddoger/user', 'Date Of Birth'),
+			'gender' => Yii::t('maddoger/user', 'Gender'),
+			'facebook_uid' => Yii::t('maddoger/user', 'Facebook Uid'),
+			'facebook_name' => Yii::t('maddoger/user', 'Facebook Name'),
+			'facebook_data' => Yii::t('maddoger/user', 'Facebook Data'),
+			'twitter_uid' => Yii::t('maddoger/user', 'Twitter Uid'),
+			'twitter_name' => Yii::t('maddoger/user', 'Twitter Name'),
+			'twitter_data' => Yii::t('maddoger/user', 'Twitter Data'),
+			'gplus_uid' => Yii::t('maddoger/user', 'Gplus Uid'),
+			'gplus_name' => Yii::t('maddoger/user', 'Gplus Name'),
+			'gplus_data' => Yii::t('maddoger/user', 'Gplus Data'),
+			'vk_uid' => Yii::t('maddoger/user', 'Vk Uid'),
+			'vk_name' => Yii::t('maddoger/user', 'Vk Name'),
+			'vk_data' => Yii::t('maddoger/user', 'Vk Data'),
+			'status' => Yii::t('maddoger/user', 'Status'),
+			'last_visit_time' => Yii::t('maddoger/user', 'Last visit time'),
+			'created_at' => Yii::t('maddoger/user', 'Create Time'),
+			'updated_at' => Yii::t('maddoger/user', 'Update Time'),
 		];
 	}
 

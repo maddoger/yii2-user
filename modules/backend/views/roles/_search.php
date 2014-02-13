@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 
 /**
  * @var yii\web\View $this
- * @var rusporting\user\modules\backend\models\AuthItemSearch $model
+ * @var maddoger\user\modules\backend\models\AuthItemSearch $model
  * @var yii\widgets\ActiveForm $form
  */
 ?>
@@ -26,8 +26,8 @@ use yii\widgets\ActiveForm;
 		<?= $form->field($model, 'data') ?>
 
 		<div class="form-group">
-			<?= Html::submitButton(Yii::t('rusporting/user', 'Search'), ['class' => 'btn btn-primary']) ?>
-			<?= Html::resetButton(Yii::t('rusporting/user', 'Reset'), ['class' => 'btn btn-default']) ?>
+			<?= Html::submitButton(Yii::t('maddoger/user', 'Search'), ['class' => 'btn btn-primary']) ?>
+			<?= Html::resetButton(Yii::t('maddoger/user', 'Reset'), ['class' => 'btn btn-default']) ?>
 		</div>
 
 	<?php ActiveForm::end(); ?>

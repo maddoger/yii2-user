@@ -1,16 +1,16 @@
 <?php
 
-namespace rusporting\user\controllers;
+namespace maddoger\user\controllers;
 
 use Yii;
 use yii\web\AccessControl;
 use yii\web\BadRequestHttpException;
 use yii\helpers\Security;
 
-use rusporting\core\FrontendController;
-use rusporting\user\models\LoginForm;
-use rusporting\user\models\User;
-use rusporting\user\models\RequestPasswordResetTokenForm;
+use maddoger\core\FrontendController;
+use maddoger\user\models\LoginForm;
+use maddoger\user\models\User;
+use maddoger\user\models\RequestPasswordResetTokenForm;
 
 class BackendAuthController extends FrontendController
 {
@@ -72,10 +72,10 @@ class BackendAuthController extends FrontendController
 		$model = new RequestPasswordResetTokenForm();
 		if ($model->load($_POST) && $model->validate()) {
 			if ($this->sendPasswordResetEmail($model->email)) {
-				Yii::$app->getSession()->setFlash('success', Yii::t('rusporting/user', 'Check your email for further instructions.'));
+				Yii::$app->getSession()->setFlash('success', Yii::t('maddoger/user', 'Check your email for further instructions.'));
 				return $this->goHome();
 			} else {
-				Yii::$app->getSession()->setFlash('error', Yii::t('rusporting/user', 'There was an error sending email.'));
+				Yii::$app->getSession()->setFlash('error', Yii::t('maddoger/user', 'There was an error sending email.'));
 			}
 		}
 		return $this->render('requestPasswordResetToken', [
@@ -91,12 +91,12 @@ class BackendAuthController extends FrontendController
 		]);
 
 		if (!$model) {
-			throw new BadRequestHttpException(Yii::t('rusporting/user', 'Wrong password reset token.'));
+			throw new BadRequestHttpException(Yii::t('maddoger/user', 'Wrong password reset token.'));
 		}
 
 		$model->scenario = 'resetPassword';
 		if ($model->load($_POST) && $model->save()) {
-			Yii::$app->getSession()->setFlash('success', Yii::t('rusporting/user', 'New password was saved.'));
+			Yii::$app->getSession()->setFlash('success', Yii::t('maddoger/user', 'New password was saved.'));
 			return $this->goHome();
 		}
 
@@ -121,7 +121,7 @@ class BackendAuthController extends FrontendController
 			return \Yii::$app->mail->compose($this->module->passwordResetTokenEmail, ['user' => $user])
 								   ->setFrom([\Yii::$app->params['supportEmail'] => \Yii::$app->name . ' robot'])
 								   ->setTo($email)
-								   ->setSubject(Yii::t('rusporting/user', 'Password reset for {name}', ['name'=> \Yii::$app->name]))
+								   ->setSubject(Yii::t('maddoger/user', 'Password reset for {name}', ['name'=> \Yii::$app->name]))
 								   ->send();
 		}
 		return false;

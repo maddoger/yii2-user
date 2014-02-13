@@ -1,14 +1,14 @@
-Yii2 User Management Module by Rusporting
+Yii2 User Management Module by maddoger
 
 ## Installation
 
 1) clone
-2) migrate: ##yii migrate --migrationPath=@rusporting/user/migrations##
+2) migrate: ##yii migrate --migrationPath=@maddoger/user/migrations##
 3) modules:
 
 'modules' => [
 		...
-		'user' => 'rusporting\user\UserModule',
+		'user' => 'maddoger\user\UserModule',
 		...
 	],
 
@@ -17,7 +17,7 @@ Yii2 User Management Module by Rusporting
 'components' => [
 		...
 		'user' => [
-			'identityClass' => 'rusporting\user\models\User',
+			'identityClass' => 'maddoger\user\models\User',
 			'loginUrl' => ['user/login'],
 		],
 		...

@@ -1,8 +1,8 @@
 <?php
 
-namespace rusporting\user\controllers;
+namespace maddoger\user\controllers;
 
-use rusporting\core\BackendController;
+use maddoger\core\BackendController;
 
 class UserBackendController extends BackendController
 {

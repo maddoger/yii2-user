@@ -2,14 +2,14 @@
 /**
  * @author Vitaliy Syrchikov <maddoger@gmail.com>
  * @link http://syrchikov.name/
- * @copyright Copyright (c) 2013-2014 Rusporting Inc.
+ * @copyright Copyright (c) 2013-2014 maddoger Inc.
  * @since 18.12.13
  */
 
-namespace rusporting\user;
+namespace maddoger\user;
 
 use Yii;
-use rusporting\core\Module;
+use maddoger\core\Module;
 use yii\rbac\Item;
 use yii\web\User;
 
@@ -17,7 +17,7 @@ class UserModule extends Module
 {
 	public $authBackendLogo = '';
 	public $authBackendLayout = 'auth';
-	public $passwordResetTokenEmail = '@rusporting/user/mails/passwordResetToken';
+	public $passwordResetTokenEmail = '@maddoger/user/mails/passwordResetToken';
 
 	public $autoLogin = true;
 
@@ -46,7 +46,7 @@ class UserModule extends Module
 	 * Translation category for Yii::t function
 	 * @var string
 	 */
-	public $translationCategory = 'rusporting/user';
+	public $translationCategory = 'maddoger/user';
 
 	/**
 	 * @inheritdoc
@@ -57,7 +57,7 @@ class UserModule extends Module
 
 		//Console
 		if (Yii::$app instanceof \yii\console\Application) {
-			$this->controllerNamespace = 'rusporting\user\console\controllers';
+			$this->controllerNamespace = 'maddoger\user\console\controllers';
 		}
 
 		Yii::$app->on(User::EVENT_AFTER_LOGIN, function ($event) {
@@ -71,7 +71,7 @@ class UserModule extends Module
 		Yii::$app->getI18n()->translations[$this->translationCategory] =
 			array(
 				'class' => 'yii\i18n\PhpMessageSource',
-				'basePath' => '@rusporting/user/messages',
+				'basePath' => '@maddoger/user/messages',
 			);
 	}
 
@@ -80,7 +80,7 @@ class UserModule extends Module
 	 */
 	public function getName()
 	{
-		return Yii::t('rusporting/user', '_module_name_');
+		return Yii::t('maddoger/user', '_module_name_');
 	}
 
 	/**
@@ -88,7 +88,7 @@ class UserModule extends Module
 	 */
 	public function getDescription()
 	{
-		return Yii::t('rusporting/user', '_module_description_');
+		return Yii::t('maddoger/user', '_module_description_');
 	}
 
 	/**
@@ -123,19 +123,19 @@ class UserModule extends Module
 		$model = parent::getConfigurationModel();
 		$model->addAttributes([
 
-			'avatarWidth' => ['label' => Yii::t('rusporting/user', 'Avatar width in pixels'),
+			'avatarWidth' => ['label' => Yii::t('maddoger/user', 'Avatar width in pixels'),
 				'rules' => [
 					['avatarWidth', 'integer'],
 					['avatarWidth', 'filter', 'filter'=>'intval'],
 				]
 			],
-			'avatarHeight' => ['label' => Yii::t('rusporting/user', 'Avatar height in pixels'),
+			'avatarHeight' => ['label' => Yii::t('maddoger/user', 'Avatar height in pixels'),
 				'rules' => [
 					['avatarWidth', 'integer'],
 					['avatarWidth', 'filter', 'filter'=>'intval'],
 				]
 			],
-			'avatarDefault' => ['type' => 'image', 'label' => Yii::t('rusporting/user', 'Default avatar')],
+			'avatarDefault' => ['type' => 'image', 'label' => Yii::t('maddoger/user', 'Default avatar')],
 
 		]);
 		return $model;
@@ -149,8 +149,8 @@ class UserModule extends Module
 		return [
 			[
 				['user/<action:(login|logout|captcha|request-password-reset|reset-password)>' => 'user/backend-auth/<action>'],
-				Yii::t('rusporting/user', 'Backend authorization route'),
-				Yii::t('rusporting/user', 'Provides authorization and password reset (with captcha) for backend application.')
+				Yii::t('maddoger/user', 'Backend authorization route'),
+				Yii::t('maddoger/user', 'Provides authorization and password reset (with captcha) for backend application.')
 			]
 		];
 	}
@@ -161,23 +161,23 @@ class UserModule extends Module
 	public function getRbacRoles()
 	{
 		return [
-			'user.create' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('rusporting/user', 'Create new users')],
-			'user.read' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('rusporting/user', 'View users')],
-			'user.update' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('rusporting/user', 'Update users')],
-			'user.delete' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('rusporting/user', 'Delete users')],
+			'user.create' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('maddoger/user', 'Create new users')],
+			'user.read' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('maddoger/user', 'View users')],
+			'user.update' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('maddoger/user', 'Update users')],
+			'user.delete' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('maddoger/user', 'Delete users')],
 			'user.manager' => [
 				'type' => Item::TYPE_ROLE,
-				'description' => Yii::t('rusporting/user', 'Users manager'),
+				'description' => Yii::t('maddoger/user', 'Users manager'),
 				'children' => [ 'user.create','user.read','user.update','user.delete' ]
 			],
 
-			'role.create' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('rusporting/user', 'Create new roles')],
-			'role.read' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('rusporting/user', 'View roles')],
-			'role.update' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('rusporting/user', 'Update roles')],
-			'role.delete' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('rusporting/user', 'Delete roles')],
+			'role.create' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('maddoger/user', 'Create new roles')],
+			'role.read' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('maddoger/user', 'View roles')],
+			'role.update' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('maddoger/user', 'Update roles')],
+			'role.delete' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('maddoger/user', 'Delete roles')],
 			'role.manager' => [
 				'type' => Item::TYPE_ROLE,
-				'description' => Yii::t('rusporting/user', 'Roles manager'),
+				'description' => Yii::t('maddoger/user', 'Roles manager'),
 				'children' => [ 'role.create','role.read','role.update','role.delete' ]
 			],
 		];
@@ -191,13 +191,13 @@ class UserModule extends Module
 	{
 		return [
 			[
-				'label' => Yii::t('rusporting/user', 'Users'), 'fa' => 'users',
+				'label' => Yii::t('maddoger/user', 'Users'), 'fa' => 'users',
 				'roles' => ['user.read', 'role.read'],
 				//'url' => 'user/user-backend/index',
 				'items' => [
-					['label' => Yii::t('rusporting/user', 'Users'), 'fa'=>'user', 'url'=> ['/user/users/index'],
+					['label' => Yii::t('maddoger/user', 'Users'), 'fa'=>'user', 'url'=> ['/user/users/index'],
 						'activeUrl'=> ['/user/users/*'], 'roles' => ['user.read'],],
-					['label' => Yii::t('rusporting/user', 'Roles'), 'fa'=>'group', 'url'=> ['/user/roles/index'],
+					['label' => Yii::t('maddoger/user', 'Roles'), 'fa'=>'group', 'url'=> ['/user/roles/index'],
 						'activeUrl'=> ['/user/roles/*'], 'roles' => ['role.read']],
 				],
 			]

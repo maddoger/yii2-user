@@ -1,6 +1,6 @@
 <?php
 
-namespace rusporting\user\models;
+namespace maddoger\user\models;
 
 use Yii;
 use yii\base\Model;
@@ -39,7 +39,7 @@ class RequestPasswordResetTokenForm extends Model
 	{
 		$user = User::findByEmail($this->email);
 		if (!$user) {
-			$this->addError('username', Yii::t('rusporting/user', 'User with this email does not exist.'));
+			$this->addError('username', Yii::t('maddoger/user', 'User with this email does not exist.'));
 		}
 	}
 
@@ -49,8 +49,8 @@ class RequestPasswordResetTokenForm extends Model
 	public function attributeLabels()
 	{
 		return [
-			'email' => Yii::t('rusporting/user', 'Email'),
-			'verifyCode' => Yii::t('rusporting/user', 'Verification code'),
+			'email' => Yii::t('maddoger/user', 'Email'),
+			'verifyCode' => Yii::t('maddoger/user', 'Verification code'),
 		];
 	}
 }

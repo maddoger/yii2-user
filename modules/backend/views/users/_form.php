@@ -2,12 +2,12 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use rusporting\user\modules\backend\models\AuthItem;
-use rusporting\user\models\User;
+use maddoger\user\modules\backend\models\AuthItem;
+use maddoger\user\models\User;
 
 /**
  * @var yii\web\View $this
- * @var rusporting\user\models\User $model
+ * @var maddoger\user\models\User $model
  * @var yii\widgets\ActiveForm $form
  */
 
@@ -27,17 +27,17 @@ $module = Yii::$app->getModule('user');
 	); ?>
 
 	<p>
-		<?= Html::submitButton($model->isNewRecord ? Yii::t('rusporting/user', 'Create') : Yii::t('rusporting/user', 'Save'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+		<?= Html::submitButton($model->isNewRecord ? Yii::t('maddoger/user', 'Create') : Yii::t('maddoger/user', 'Save'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 	</p>
 
 	<div class="row">
 
 		<div class="col-md-12">
 			<ul class="nav nav-tabs" style="margin-bottom: 15px;">
-				<li class="active"><a href="#auth" data-toggle="tab"><?= Yii::t('rusporting/user', 'Authentication') ?></a></li>
-				<li><a href="#main" data-toggle="tab"><?= Yii::t('rusporting/user', 'Main info') ?></a></li>
-				<li><a href="#social" data-toggle="tab"><?= Yii::t('rusporting/user', 'Social') ?></a></li>
-				<li><a href="#roles" data-toggle="tab"><?= Yii::t('rusporting/user', 'Roles') ?></a></li>
+				<li class="active"><a href="#auth" data-toggle="tab"><?= Yii::t('maddoger/user', 'Authentication') ?></a></li>
+				<li><a href="#main" data-toggle="tab"><?= Yii::t('maddoger/user', 'Main info') ?></a></li>
+				<li><a href="#social" data-toggle="tab"><?= Yii::t('maddoger/user', 'Social') ?></a></li>
+				<li><a href="#roles" data-toggle="tab"><?= Yii::t('maddoger/user', 'Roles') ?></a></li>
 
 			</ul>
 			<div id="myTabContent" class="tab-content">
@@ -46,7 +46,7 @@ $module = Yii::$app->getModule('user');
 
 					<?= $form->field($model, 'username')->textInput(['maxlength' => 255]) ?>
 
-					<?= $form->field($model, 'password')->passwordInput(['placeholder'=> Yii::t('rusporting/user', 'New password'), 'maxlength' => 255, 'autocomplete'=>'off']) ?>
+					<?= $form->field($model, 'password')->passwordInput(['placeholder'=> Yii::t('maddoger/user', 'New password'), 'maxlength' => 255, 'autocomplete'=>'off']) ?>
 
 					<?= $form->field($model, 'email')->textInput(['maxlength' => 255]) ?>
 
@@ -64,12 +64,12 @@ $module = Yii::$app->getModule('user');
 
 					<?= $form->field($model, 'nick_name')->textInput(['maxlength' => 50]) ?>
 
-					<?= $form->field($model, 'date_of_birth')->widget('rusporting\admin\widgets\DateEditor') ?>
+					<?= $form->field($model, 'date_of_birth')->widget('maddoger\admin\widgets\DateEditor') ?>
 
 					<?= $form->field($model, 'gender')->dropDownList(User::getGenderItems()) ?>
 
 					<?php
-						echo $form->field($model, 'avatar')->widget('rusporting\admin\widgets\ImageInput', [
+						echo $form->field($model, 'avatar')->widget('maddoger\admin\widgets\ImageInput', [
 							'width' => $module->avatarWidth,
 							'height' => $module->avatarHeight,
 							'preview' => $model->getAvatarSrc(),
@@ -112,15 +112,15 @@ $module = Yii::$app->getModule('user');
 						$items[$ar['name']] = $ar['description'];
 					}
 
-					echo $form->field($model, 'rolesNames')->widget('rusporting\admin\widgets\Select2', [
+					echo $form->field($model, 'rolesNames')->widget('maddoger\admin\widgets\Select2', [
 						'data' => $items,
 						'options' => [
 							'multiple' => true,
-							'prompt' => Yii::t('rusporting/user', 'Choose roles'),
+							'prompt' => Yii::t('maddoger/user', 'Choose roles'),
 						],
 						'pluginOptions' => [
 							'allowClear' => true,
-							'placeholder' => Yii::t('rusporting/user', 'Choose roles'),
+							'placeholder' => Yii::t('maddoger/user', 'Choose roles'),
 						],
 					]);
 					?>
@@ -130,7 +130,7 @@ $module = Yii::$app->getModule('user');
 	</div>
 
 	<p>
-		<?= Html::submitButton($model->isNewRecord ? Yii::t('rusporting/user', 'Create') : Yii::t('rusporting/user', 'Save'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+		<?= Html::submitButton($model->isNewRecord ? Yii::t('maddoger/user', 'Create') : Yii::t('maddoger/user', 'Save'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 	</p>
 
 

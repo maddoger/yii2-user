@@ -1,16 +1,16 @@
 <?php
 
-namespace rusporting\user\modules\backend\controllers;
+namespace maddoger\user\modules\backend\controllers;
 
-use rusporting\user\modules\backend\models\AuthItem;
-use rusporting\user\modules\backend\models\AuthItemChild;
-use rusporting\user\modules\backend\models\AuthItemSearch;
-use rusporting\core\BackendController;
+use maddoger\user\modules\backend\models\AuthItem;
+use maddoger\user\modules\backend\models\AuthItemChild;
+use maddoger\user\modules\backend\models\AuthItemSearch;
+use maddoger\core\BackendController;
 use yii\rbac\Item;
 use yii\web\NotFoundHttpException;
 use yii\web\VerbFilter;
 use Yii;
-use rusporting\core\Module;
+use maddoger\core\Module;
 
 /**
  * RolesController implements the CRUD actions for AuthItem model.
@@ -219,7 +219,7 @@ class RolesController extends BackendController
 				AuthItem::updateAll(['module'=>$module->id], ['name' => array_keys($roles)]);
 			}
 
-			\Yii::$app->getSession()->setFlash('success', \Yii::t('rusporting/user', 'Roles was update successfully!'));
+			\Yii::$app->getSession()->setFlash('success', \Yii::t('maddoger/user', 'Roles was update successfully!'));
 			return $this->redirect(['index']);
 		}
 	}

@@ -2,25 +2,25 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use rusporting\user\modules\backend\models\AuthItem;
-use rusporting\user\models\User;
+use maddoger\user\modules\backend\models\AuthItem;
+use maddoger\user\models\User;
 
 /**
  * @var yii\web\View $this
- * @var rusporting\user\models\User $model
+ * @var maddoger\user\models\User $model
  */
 
 $this->title = $model->full_name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('rusporting/user', 'Users'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('maddoger/user', 'Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-view">
 
 	<p>
-		<?= Html::a(Yii::t('rusporting/user', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-		<?php echo Html::a(Yii::t('rusporting/user', 'Delete'), ['delete', 'id' => $model->id], [
+		<?= Html::a(Yii::t('maddoger/user', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+		<?php echo Html::a(Yii::t('maddoger/user', 'Delete'), ['delete', 'id' => $model->id], [
 			'class' => 'btn btn-danger',
-			'data-confirm' => Yii::t('rusporting/user', 'Are you sure to delete this item?'),
+			'data-confirm' => Yii::t('maddoger/user', 'Are you sure to delete this item?'),
 			'data-method' => 'post',
 		]); ?>
 	</p>
@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	{
 		$items[$ar['name']] = $ar['name'].' - '.$ar['description'];
 	}
-	//echo $form->field($model, 'rolesNames')->listBox($items, ['class'=>'form-control select2', 'multiple'=> true, 'prompt' => Yii::t('rusporting/user', 'No roles')]);
+	//echo $form->field($model, 'rolesNames')->listBox($items, ['class'=>'form-control select2', 'multiple'=> true, 'prompt' => Yii::t('maddoger/user', 'No roles')]);
 
 	$roles = '<ul class="list-unstyled">';
 	foreach ($model->getRolesNames() as $name) {
@@ -58,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			'full_name',
 			'date_of_birth:date',
 			[
-				'label' => Yii::t('rusporting/user', 'Gender'),
+				'label' => Yii::t('maddoger/user', 'Gender'),
 				'format' => 'text',
 				'value' => $genders[$model->gender],
 			],
@@ -75,7 +75,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			'vk_name',
 			'vk_data:ntext',
 			[
-				'label' => Yii::t('rusporting/user', 'Roles'),
+				'label' => Yii::t('maddoger/user', 'Roles'),
 				'format' => 'html',
 				'value' => $roles,
 			],

@@ -3,11 +3,11 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\rbac\Item;
-use rusporting\user\modules\backend\models\AuthItem;
+use maddoger\user\modules\backend\models\AuthItem;
 
 /**
  * @var yii\web\View $this
- * @var rusporting\user\modules\backend\models\AuthItem $model
+ * @var maddoger\user\modules\backend\models\AuthItem $model
  * @var yii\widgets\ActiveForm $form
  */
 ?>
@@ -17,13 +17,13 @@ use rusporting\user\modules\backend\models\AuthItem;
 	<?php $form = ActiveForm::begin(); ?>
 
 		<div class="form-group">
-			<?= Html::submitButton($model->isNewRecord ? Yii::t('rusporting/user', 'Create') : Yii::t('rusporting/user', 'Save'),
+			<?= Html::submitButton($model->isNewRecord ? Yii::t('maddoger/user', 'Create') : Yii::t('maddoger/user', 'Save'),
 				['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 		</div>
 
 		<?= $form->field($model, 'name')->textInput(['maxlength' => 64]) ?>
 
-		<?= $form->field($model, 'type')->dropDownList(AuthItem::getTypeValues(), ['prompt' => Yii::t('rusporting/user', 'Choose item type')]); ?>
+		<?= $form->field($model, 'type')->dropDownList(AuthItem::getTypeValues(), ['prompt' => Yii::t('maddoger/user', 'Choose item type')]); ?>
 
 		<?= $form->field($model, 'description')->textarea(['rows' => 2]) ?>
 
@@ -36,7 +36,7 @@ use rusporting\user\modules\backend\models\AuthItem;
 				$items[$ar['name']] = $ar['description'];
 			}
 		}
-		echo $form->field($model, 'children')->listBox($items, ['class'=>'form-control select2', 'multiple'=> true, 'prompt' => Yii::t('rusporting/user', 'No children')]);
+		echo $form->field($model, 'children')->listBox($items, ['class'=>'form-control select2', 'multiple'=> true, 'prompt' => Yii::t('maddoger/user', 'No children')]);
 
 		?>
 
@@ -45,7 +45,7 @@ use rusporting\user\modules\backend\models\AuthItem;
 		<?= $form->field($model, 'data')->textarea(['rows' => 2]) ?>
 
 		<div class="form-group">
-			<?= Html::submitButton($model->isNewRecord ? Yii::t('rusporting/user', 'Create') : Yii::t('rusporting/user', 'Save'),
+			<?= Html::submitButton($model->isNewRecord ? Yii::t('maddoger/user', 'Create') : Yii::t('maddoger/user', 'Save'),
 				['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 		</div>
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace rusporting\user\modules\backend\models;
+namespace maddoger\user\modules\backend\models;
 
 /**
  * This is the model class for table "public.tbl_auth_item_child".
@@ -11,7 +11,7 @@ namespace rusporting\user\modules\backend\models;
  * @property AuthItem $parentRecord
  * @property AuthItem $childRecord
  */
-class AuthItemChild extends \rusporting\core\ActiveRecord
+class AuthItemChild extends \maddoger\core\ActiveRecord
 {
 	/**
 	 * @inheritdoc

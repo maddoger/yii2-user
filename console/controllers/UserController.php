@@ -1,12 +1,12 @@
 <?php
 
-namespace rusporting\user\console\controllers;
+namespace maddoger\user\console\controllers;
 
 use Yii;
 use yii\console\Exception;
 use yii\console\Controller;
 use yii\db\Connection;
-use rusporting\user\models\User;
+use maddoger\user\models\User;
 
 class UserController extends Controller
 {
@@ -34,7 +34,7 @@ class UserController extends Controller
 			}
 
 			$version = Yii::getVersion();
-			echo "Rusporting User Creation tool (based on Yii v{$version})\n\n";
+			echo "maddoger User Creation tool (based on Yii v{$version})\n\n";
 			return true;
 		} else {
 			return false;

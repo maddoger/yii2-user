@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace rusporting\user\widgets;
+namespace maddoger\user\widgets;
 
 use Yii;
 

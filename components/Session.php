@@ -1,6 +1,6 @@
 <?php
 
-namespace rusporting\user\components;
+namespace maddoger\user\components;
 
 use yii\web\DbSession;
 use Yii;

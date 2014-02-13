@@ -10,7 +10,7 @@ use yii\captcha\CaptchaAsset;
  * @var common\models\User $model
  *
  */
-$this->title = Yii::t('rusporting/user', 'Request password reset');
+$this->title = Yii::t('maddoger/user', 'Request password reset');
 $this->params['breadcrumbs'][] = $this->title;
 CaptchaAsset::register($this);
 ?>
@@ -18,7 +18,7 @@ CaptchaAsset::register($this);
 	<div class="col-md-6 col-md-offset-3">
 		<h2><?= Html::encode($this->title) ?></h2>
 
-		<p><?= Yii::t('rusporting/user', 'Please fill out your email. A link to reset password will be sent there.') ?></p>
+		<p><?= Yii::t('maddoger/user', 'Please fill out your email. A link to reset password will be sent there.') ?></p>
 
 		<div>
 			<?php $form = ActiveForm::begin(['id' => 'request-password-reset-form']); ?>
@@ -29,9 +29,9 @@ CaptchaAsset::register($this);
 				'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
 			]) ?>
 			<p>
-				<?= Html::submitButton(Yii::t('rusporting/user', 'Send'), ['class' => 'btn btn-lg btn-block btn-success']) ?>
+				<?= Html::submitButton(Yii::t('maddoger/user', 'Send'), ['class' => 'btn btn-lg btn-block btn-success']) ?>
 			</p>
-			<p class="text-center"><?= Yii::t('rusporting/user', 'Remembered your password?') .' '. Html::a(Yii::t('rusporting/user', 'Login here'), ['/user/backend-auth/login']) ?></p>
+			<p class="text-center"><?= Yii::t('maddoger/user', 'Remembered your password?') .' '. Html::a(Yii::t('maddoger/user', 'Login here'), ['/user/backend-auth/login']) ?></p>
 			<?php ActiveForm::end(); ?>
 		</div>
 

@@ -2,12 +2,12 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use rusporting\user\models\User;
-use rusporting\user\modules\backend\models\AuthItem;
+use maddoger\user\models\User;
+use maddoger\user\modules\backend\models\AuthItem;
 
 /**
  * @var yii\web\View $this
- * @var rusporting\user\modules\backend\models\UserSearch $model
+ * @var maddoger\user\modules\backend\models\UserSearch $model
  * @var yii\widgets\ActiveForm $form
  */
 ?>
@@ -29,7 +29,7 @@ use rusporting\user\modules\backend\models\AuthItem;
 			<div class="panel-heading">
 				<h4 class="panel-title">
 					<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-						<?= Yii::t('rusporting/user', 'Search') ?>
+						<?= Yii::t('maddoger/user', 'Search') ?>
 						<span class="caret"></span>
 					</a>
 				</h4>
@@ -48,9 +48,9 @@ use rusporting\user\modules\backend\models\AuthItem;
 						</div>
 						<div class="col-lg-3">
 							<?= $form->field($model, 'email_confirmed')->dropDownList([
-								'' => Yii::t('rusporting/user', 'Anything'),
-								0 => Yii::t('rusporting/user', 'No'),
-								1 => Yii::t('rusporting/user', 'Yes'),
+								'' => Yii::t('maddoger/user', 'Anything'),
+								0 => Yii::t('maddoger/user', 'No'),
+								1 => Yii::t('maddoger/user', 'Yes'),
 							]) ?>
 						</div>
 					</div>
@@ -73,7 +73,7 @@ use rusporting\user\modules\backend\models\AuthItem;
 							<?= $form->field($model, 'date_of_birth')->textInput(['class' => 'form-control date-editor']) ?>
 						</div>
 						<div class="col-lg-3">
-							<?= $form->field($model, 'gender')->dropDownList(User::getGenderItems(), ['prompt'=> Yii::t('rusporting/user', 'Anything')]) ?>
+							<?= $form->field($model, 'gender')->dropDownList(User::getGenderItems(), ['prompt'=> Yii::t('maddoger/user', 'Anything')]) ?>
 						</div>
 						<div class="col-lg-6"></div>
 					</div>
@@ -115,8 +115,8 @@ use rusporting\user\modules\backend\models\AuthItem;
 					</div>
 					<div class="row">
 						<div class="col-lg-12">
-							<?= Html::submitButton(Yii::t('rusporting/user', 'Search'), ['class' => 'btn btn-primary']) ?>
-							<?= Html::a(Yii::t('rusporting/user', 'Reset'), ['index'], ['class' => 'btn btn-default']) ?>
+							<?= Html::submitButton(Yii::t('maddoger/user', 'Search'), ['class' => 'btn btn-primary']) ?>
+							<?= Html::a(Yii::t('maddoger/user', 'Reset'), ['index'], ['class' => 'btn btn-default']) ?>
 						</div>
 					</div>
 				</div>

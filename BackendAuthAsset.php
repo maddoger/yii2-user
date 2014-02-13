@@ -1,12 +1,12 @@
 <?php
 
-namespace rusporting\user;
+namespace maddoger\user;
 
 use yii\web\AssetBundle;
 
 class BackendAuthAsset extends AssetBundle
 {
-	public $sourcePath = '@rusporting/user/assets';
+	public $sourcePath = '@maddoger/user/assets';
 	public $css = ['main.less'];
 	public $js = [];
 	public $depends = [
