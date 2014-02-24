@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		if (!$children) return '';
 		$childrenVal = '<ul class="list-unstyled">';
 		foreach ($children as $child) {
-			$childrenVal .= '<li><strong>'.$child->description.'</strong> (<a href="'.Yii::$app->controller->createUrl('view', ['id'=>$child->name]). '">'.
+			$childrenVal .= '<li><strong>'.$child->description.'</strong> (<a href="'.Yii::$app->controller->createUrl(['view', 'id'=>$child->name]). '">'.
 				$child->name.'</a>)</li>';
 			$childrenVal .= getChildren($child->getChildren()->all());
 		}
