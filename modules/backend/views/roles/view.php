@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	echo DetailView::widget([
 		'model' => $model,
 		'attributes' => [
-			'name',
+			'attribute',
 			[
 				'label' => Yii::t('maddoger/user', 'Type'),
 				'value' => $types[$model->type],
