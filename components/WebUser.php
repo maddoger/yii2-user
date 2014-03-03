@@ -46,9 +46,9 @@ class WebUser extends BaseWebUser {
 	/**
 	 * @inheritdoc
 	 */
-	protected function afterLogin($identity, $cookieBased)
+	protected function afterLogin($identity, $cookieBased, $duration)
 	{
-		parent::afterLogin($identity, $cookieBased);
+		parent::afterLogin($identity, $cookieBased, $duration);
 		$this->identity->updateLastVisitTime();
 	}
 
