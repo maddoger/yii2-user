@@ -9,7 +9,7 @@ use maddoger\user\models\User;
  *
  * @property string $item_name
  * @property integer $user_id
- * @property string $biz_rule
+ * @property string $rule_name
  * @property string $data
  *
  * @property AuthItem $itemName
@@ -25,7 +25,7 @@ class AuthAssignment extends \maddoger\core\ActiveRecord
 		return [
 			[['item_name', 'user_id'], 'required'],
 			[['user_id'], 'integer'],
-			[['biz_rule', 'data'], 'string'],
+			[['rule_name', 'data'], 'string'],
 			[['item_name'], 'string', 'max' => 64]
 		];
 	}
@@ -38,7 +38,7 @@ class AuthAssignment extends \maddoger\core\ActiveRecord
 		return [
 			'item_name' => 'AuthItem Name',
 			'user_id' => 'User ID',
-			'biz_rule' => 'Biz Rule',
+			'rule_name' => 'Biz Rule',
 			'data' => 'Data',
 		];
 	}

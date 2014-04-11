@@ -183,7 +183,7 @@ class RolesController extends BackendController
 
 				foreach ($roles as $name => $role) {
 					if (!isset($role['data'])) $role['data'] = null;
-					if (!isset($role['biz_rule'])) $role['biz_rule'] = null;
+					if (!isset($role['rule_name'])) $role['rule_name'] = null;
 					if (!isset($role['description'])) $role['data'] = null;
 
 					if ($man->getItem($name) !== null) {
@@ -201,7 +201,7 @@ class RolesController extends BackendController
 						}
 					} else {
 						//New
-						$man->createItem($name, $role['type'], $role['description'], $role['biz_rule'], $role['data']);
+						$man->createItem($name, $role['type'], $role['description'], $role['rule_name'], $role['data']);
 						if (isset($role['children']) && is_array($role['children'])) {
 							foreach ($role['children'] as $child) {
 								$man->addItemChild($name, $child);

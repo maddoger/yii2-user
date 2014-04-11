@@ -35,7 +35,7 @@ class AuthItem extends ActiveRecord
 			[['name', 'type'], 'required'],
 			['name', 'match', 'pattern' => '/^[\da-zA-Z\.\-_]+$/', 'message' => Yii::t('maddoger/user', 'Only letters, numbers and comma are acceptable.')],
 			[['type'], 'integer'],
-			[['description', 'data', 'biz_rule'], 'string'],
+			[['description', 'data', 'rule_name'], 'string'],
 			[['name'], 'string', 'max' => 64]
 		];
 	}
@@ -49,7 +49,7 @@ class AuthItem extends ActiveRecord
 			'name' =>  Yii::t('maddoger/user', 'Role name'),
 			'type' =>  Yii::t('maddoger/user', 'Type'),
 			'description' => Yii::t('maddoger/user', 'Description'),
-			'biz_rule' => Yii::t('maddoger/user', 'Biz rule'),
+			'rule_name' => Yii::t('maddoger/user', 'Rule name'),
 			'data' => Yii::t('maddoger/user', 'Data'),
 			'children' => Yii::t('maddoger/user', 'Children'),
 		];

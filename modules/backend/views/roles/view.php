@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		if (!$children) return '';
 		$childrenVal = '<ul class="list-unstyled">';
 		foreach ($children as $child) {
-			$childrenVal .= '<li><strong>'.$child->description.'</strong> (<a href="'.Yii::$app->controller->createUrl(['view', 'id'=>$child->name]). '">'.
+			$childrenVal .= '<li><strong>'.$child->description.'</strong> (<a href="'.\yii\helpers\Url::to(['view', 'id'=>$child->name]). '">'.
 				$child->name.'</a>)</li>';
 			$childrenVal .= getChildren($child->getChildren()->all());
 		}
@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				'value' => $types[$model->type],
 			],
 			'description:ntext',
-			'biz_rule:ntext',
+			'rule_name',
 			'data:ntext',
 			[
 				'label' => Yii::t('maddoger/user', 'Children roles'),

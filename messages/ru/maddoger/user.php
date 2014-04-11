@@ -25,7 +25,7 @@ return array (
   'Avatar height in pixels' => 'Высота аватара в пикселях',
   'Avatar width in pixels' => 'Ширина аватара в пикселях',
   'Backend authorization route' => '',
-  'Biz rule' => 'Правило (php)',
+  'Rule name' => 'Правило',
   'Check your email for further instructions.' => 'Проверьте свою почту для получения дальнейших инструкций.',
   'Children' => 'Дочерние роли',
   'Children roles' => 'Дочерние роли',

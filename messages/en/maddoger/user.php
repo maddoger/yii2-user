@@ -25,7 +25,7 @@ return array (
   'Avatar height in pixels' => '',
   'Avatar width in pixels' => '',
   'Backend authorization route' => '',
-  'Biz rule' => '',
+  'Rule name' => '',
   'Check your email for further instructions.' => '',
   'Children' => '',
   'Children roles' => '',

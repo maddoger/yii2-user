@@ -15,13 +15,13 @@ class AuthItemSearch extends Model
 	public $name;
 	public $type = Item::TYPE_ROLE;
 	public $description;
-	public $biz_rule;
+	public $rule_name;
 	public $data;
 
 	public function rules()
 	{
 		return [
-			[['name', 'description', 'data', 'biz_rule'], 'safe'],
+			[['name', 'description', 'data', 'rule_name'], 'safe'],
 			[['type'], 'integer'],
 		];
 	}
@@ -35,7 +35,7 @@ class AuthItemSearch extends Model
 			'name' => 'Name',
 			'type' => 'Type',
 			'description' => 'Description',
-			'biz_rule' => 'Biz rule',
+			'rule_name' => 'Rule name',
 			'data' => 'Data',
 		];
 	}
@@ -59,7 +59,7 @@ class AuthItemSearch extends Model
 		$this->addCondition($query, 'name', true);
 		$this->addCondition($query, 'type');
 		$this->addCondition($query, 'description', true);
-		$this->addCondition($query, 'biz_rule', true);
+		$this->addCondition($query, 'rule_name', true);
 		$this->addCondition($query, 'data', true);
 		return $dataProvider;
 	}

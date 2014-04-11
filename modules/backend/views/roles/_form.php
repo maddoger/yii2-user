@@ -40,7 +40,7 @@ use maddoger\user\modules\backend\models\AuthItem;
 
 		?>
 
-		<?= $form->field($model, 'biz_rule')->textarea(['rows' => 2]) ?>
+		<?= $form->field($model, 'rule_name')->textInput(['rows' => 2]) ?>
 
 		<?= $form->field($model, 'data')->textarea(['rows' => 2]) ?>
 
