@@ -11,7 +11,7 @@ use yii\image\ImageDriver;
 use yii\validators\ImageValidator;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
-use yii\web\VerbFilter;
+use yii\filters\VerbFilter;
 use Yii;
 
 /**
@@ -23,7 +23,7 @@ class UsersController extends BackendController
 	{
 		return [
 			'access' => [
-				'class' => 'yii\web\AccessControl',
+				'class' => 'yii\filters\AccessControl',
 				'rules' => [
 					[
 						'actions' => ['index', 'view'],
@@ -167,7 +167,7 @@ class UsersController extends BackendController
 	 */
 	protected function findModel($id)
 	{
-		if (($model = User::find($id)) !== null) {
+		if (($model = User::findOne($id)) !== null) {
 			return $model;
 		} else {
 			throw new NotFoundHttpException(\Yii::t('maddoger/user', 'The requested user does not exist.'));

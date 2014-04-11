@@ -3,7 +3,7 @@
 namespace maddoger\user\controllers;
 
 use Yii;
-use yii\web\AccessControl;
+use yii\filters\AccessControl;
 use yii\web\BadRequestHttpException;
 use yii\helpers\Security;
 
@@ -85,7 +85,7 @@ class BackendAuthController extends FrontendController
 
 	public function actionResetPassword($token)
 	{
-		$model = User::find([
+		$model = User::findOne([
 			'password_reset_token' => $token,
 			'status' => User::STATUS_ACTIVE,
 		]);
@@ -107,7 +107,7 @@ class BackendAuthController extends FrontendController
 
 	private function sendPasswordResetEmail($email)
 	{
-		$user = User::find([
+		$user = User::findOne([
 			'status' => User::STATUS_ACTIVE,
 			'email' => $email,
 		]);

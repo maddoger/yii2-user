@@ -8,7 +8,7 @@ use maddoger\user\modules\backend\models\AuthItemSearch;
 use maddoger\core\BackendController;
 use yii\rbac\Item;
 use yii\web\NotFoundHttpException;
-use yii\web\VerbFilter;
+use yii\filters\VerbFilter;
 use Yii;
 use maddoger\core\Module;
 
@@ -21,7 +21,7 @@ class RolesController extends BackendController
 	{
 		return [
 			'access' => [
-				'class' => 'yii\web\AccessControl',
+				'class' => 'yii\filters\AccessControl',
 				'rules' => [
 					[
 						'actions' => ['index', 'view'],
@@ -188,7 +188,7 @@ class RolesController extends BackendController
 
 					if ($man->getItem($name) !== null) {
 						//Item exists
-						$r = AuthItem::find($name);
+						$r = AuthItem::findOne($name);
 						$r->setAttributes($role);
 						$r->save(false);
 
@@ -233,7 +233,7 @@ class RolesController extends BackendController
 	 */
 	protected function findModel($id)
 	{
-		if (($model = AuthItem::find($id)) !== null) {
+		if (($model = AuthItem::findOne($id)) !== null) {
 			return $model;
 		} else {
 			throw new NotFoundHttpException('The requested page does not exist.');

@@ -45,7 +45,7 @@ class AuthAssignment extends \maddoger\core\ActiveRecord
 
 	public static function findByUserId($userId)
 	{
-		return static::find(['user_id' => $userId]);
+		return static::findAll(['user_id' => $userId]);
 	}
 
 	/**

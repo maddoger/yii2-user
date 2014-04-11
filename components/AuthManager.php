@@ -22,7 +22,7 @@ class AuthManager extends DbManager
 	public function init()
 	{
 		if (is_string($this->db)) {
-			$this->db = Yii::$app->getComponent($this->db);
+			$this->db = Yii::$app->get($this->db);
 		}
 
 		if (!$this->assignmentTable) {

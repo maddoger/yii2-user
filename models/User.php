@@ -6,6 +6,7 @@ use maddoger\user\modules\backend\models\AuthAssignment;
 use maddoger\user\modules\backend\models\AuthItemChild;
 use Yii;
 use maddoger\core\ActiveRecord;
+use yii\base\NotSupportedException;
 use yii\helpers\Security;
 use yii\web\IdentityInterface;
 
@@ -109,7 +110,7 @@ class User extends ActiveRecord implements IdentityInterface
 	 */
 	public static function findIdentity($id)
 	{
-		return static::find($id);
+		return static::findOne($id);
 	}
 
 	/**
@@ -121,7 +122,7 @@ class User extends ActiveRecord implements IdentityInterface
 	 */
 	public static function findIdentityByAccessToken($token)
 	{
-		return null;
+        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
 	}
 
 	/**
@@ -132,7 +133,7 @@ class User extends ActiveRecord implements IdentityInterface
 	 */
 	public static function findByUsername($username)
 	{
-		return static::find(['username_canonical' => $username, 'status' => static::STATUS_ACTIVE]);
+		return static::findOne(['username_canonical' => $username, 'status' => static::STATUS_ACTIVE]);
 	}
 
 	/**
@@ -143,7 +144,7 @@ class User extends ActiveRecord implements IdentityInterface
 	 */
 	public static function findByEmail($email)
 	{
-		return static::find(['email_canonical' => $email, 'status' => static::STATUS_ACTIVE]);
+		return static::findOne(['email_canonical' => $email, 'status' => static::STATUS_ACTIVE]);
 	}
 
 	/**
@@ -154,7 +155,7 @@ class User extends ActiveRecord implements IdentityInterface
 	 */
 	public static function findByUsernameOrEmail($usernameOrEmail)
 	{
-		return static::find(['and',
+		return static::findOne(['and',
 			['or', ['username_canonical' => $usernameOrEmail], ['email_canonical' => $usernameOrEmail]],
 			['status' => static::STATUS_ACTIVE]]
 		);
