@@ -36,7 +36,12 @@ class AuthItem extends ActiveRecord
 			['name', 'match', 'pattern' => '/^[\da-zA-Z\.\-_]+$/', 'message' => Yii::t('maddoger/user', 'Only letters, numbers and comma are acceptable.')],
 			[['type'], 'integer'],
 			[['description', 'data', 'rule_name'], 'string'],
-			[['name'], 'string', 'max' => 64]
+			[['name'], 'string', 'max' => 64],
+            ['rule_name', 'filter', 'filter' => function ($value) {
+                    // here we are removing all swear words from text
+                    return (!$value || empty($value)) ? null : $value;
+                }],
+
 		];
 	}
 

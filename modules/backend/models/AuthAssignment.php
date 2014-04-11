@@ -26,7 +26,11 @@ class AuthAssignment extends \maddoger\core\ActiveRecord
 			[['item_name', 'user_id'], 'required'],
 			[['user_id'], 'integer'],
 			[['rule_name', 'data'], 'string'],
-			[['item_name'], 'string', 'max' => 64]
+			[['item_name'], 'string', 'max' => 64],
+            ['rule_name', 'filter', 'filter' => function ($value) {
+                    // here we are removing all swear words from text
+                    return (!$value || empty($value)) ? null : $value;
+                }],
 		];
 	}
 
@@ -38,7 +42,7 @@ class AuthAssignment extends \maddoger\core\ActiveRecord
 		return [
 			'item_name' => 'AuthItem Name',
 			'user_id' => 'User ID',
-			'rule_name' => 'Biz Rule',
+			'rule_name' => 'Rule name',
 			'data' => 'Data',
 		];
 	}
