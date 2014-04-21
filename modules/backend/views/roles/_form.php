@@ -28,14 +28,19 @@ use maddoger\user\modules\backend\models\AuthItem;
 		<?= $form->field($model, 'description')->textarea(['rows' => 2]) ?>
 
 		<?php
-		$all = AuthItem::find()->select(['name', 'description'])->orderBy('name')->asArray()->all();
-		$items = [];
+		$all = AuthItem::find()->select(['name', 'type', 'description'])->orderBy('type, name')->asArray()->all();
+		$items = [1=> [], 2 => []];
 		foreach ($all as $ar)
 		{
 			if ($ar['name'] != $model->name) {
-				$items[$ar['name']] = $ar['description'];
+				$items[$ar['type']][$ar['name']] = $ar['description'];
 			}
 		}
+        $items = [
+            Yii::t('maddoger/user', 'Roles') => $items[1],
+            Yii::t('maddoger/user', 'Permissions') => $items[2],
+        ];
+
 		echo $form->field($model, 'children')->listBox($items, ['class'=>'form-control select2', 'multiple'=> true, 'prompt' => Yii::t('maddoger/user', 'No children')]);
 
 		?>

@@ -31,12 +31,12 @@ $this->params['breadcrumbs'][] = $this->title;
 		foreach ($children as $child) {
 			$childrenVal .= '<li><strong>'.$child->description.'</strong> (<a href="'.\yii\helpers\Url::to(['view', 'id'=>$child->name]). '">'.
 				$child->name.'</a>)</li>';
-			$childrenVal .= getChildren($child->getChildren()->all());
+			$childrenVal .= getChildren($child->getChildren()->orderBy(['type'=>SORT_ASC, 'name'=>SORT_ASC])->all());
 		}
-		return $childrenVal.'</ul>';
+		return $childrenVal.'</ul><br />';
 	}
 
-	$children = $model->getChildren()->all();
+	$children = $model->getChildren()->orderBy(['type'=>SORT_ASC, 'name'=>SORT_ASC])->all();
 	$childrenVal = getChildren($children);
 
 	$types = $model->getTypeValues();

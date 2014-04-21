@@ -95,8 +95,9 @@ class RolesController extends BackendController
 
 		if ($model->load($_POST) && $model->save()) {
 			if (isset($_POST[$model->formName()]['children'])) {
-				$children = $_POST[$model->formName()]['children'];
+				$children = @$_POST[$model->formName()]['children'];
 
+                if ($children)
 				foreach ($children as $child) {
 					$new = new AuthItemChild();
 					$new->child = $child;
@@ -124,9 +125,10 @@ class RolesController extends BackendController
 
 		if ($model->load($_POST) && $model->save()) {
 			if (isset($_POST[$model->formName()]['children'])) {
-				$children = $_POST[$model->formName()]['children'];
+				$children = @$_POST[$model->formName()]['children'];
 
 				AuthItemChild::deleteAll(['parent'=>$model->name]);
+                if ($children)
 				foreach ($children as $child) {
 					$new = new AuthItemChild();
 					$new->child = $child;
@@ -181,39 +183,54 @@ class RolesController extends BackendController
 				//Delete old rules for module
 				$oldItems = AuthItem::find()->where(['module' => $module->id])->asArray()->all();
 
-				foreach ($roles as $name => $role) {
-					if (!isset($role['data'])) $role['data'] = null;
-					if (!isset($role['rule_name'])) $role['rule_name'] = null;
-					if (!isset($role['description'])) $role['data'] = null;
+				foreach ($roles as $name => $item) {
+					if (!isset($item['data'])) $item['data'] = null;
+					if (!isset($item['rule_name'])) $item['rule_name'] = null;
+					if (!isset($item['description'])) $item['data'] = null;
 
-					if ($man->getItem($name) !== null) {
-						//Item exists
-						$r = AuthItem::findOne($name);
-						$r->setAttributes($role);
-						$r->save(false);
+                    if ($item['type'] == Item::TYPE_PERMISSION) {
+                        if ($man->getPermission($name) !== null) {
+                            //Item exists
+                            $r = AuthItem::findOne($name);
+                            $r->setAttributes($item);
+                            $r->save(false);
+                        } else {
+                            $permission = $man->createPermission($name);
+                            //$permission->ruleName = $item['rule_name'];
+                            $permission->data = $item['data'];
+                            $permission->description = $item['description'];
+                            $man->add($permission);
+                        }
+                    } else if ($item['type'] == Item::TYPE_ROLE) {
+                        
+                        if (($role = $man->getRole($name)) === null) {
+                            $role = $man->createRole($name);
+                        }
 
-						if (isset($role['children']) && is_array($role['children'])) {
-							foreach ($role['children'] as $child) {
-								if (!$man->hasItemChild($name, $child)) {
-									$man->addItemChild($name, $child);
-								}
-							}
-						}
-					} else {
-						//New
-						$man->createItem($name, $role['type'], $role['description'], $role['rule_name'], $role['data']);
-						if (isset($role['children']) && is_array($role['children'])) {
-							foreach ($role['children'] as $child) {
-								$man->addItemChild($name, $child);
-							}
-						}
-					}
+                        $role->ruleName = $item['rule_name'];
+                        $role->data = $item['data'];
+                        $role->description = $item['description'];
+                        $man->add($role);
+
+                        if (isset($item['children']) && is_array($item['children'])) {
+                            foreach ($item['children'] as $child) {
+                                $child  = $man->getPermission($child);
+                                if (!$child) $child = $man->getRole($child);
+                                if ($child) {
+                                    $man->addChild($role, $child);
+                                }
+                            }
+                        }
+                    }
+
 				}
 
 				//Delete old
 				foreach ($oldItems as $item) {
 					if (!isset($roles[$item['name']])) {
-						$man->removeItem($item['name']);
+                        $obj = $man->getPermission($item['name']);
+                        if (!$obj) $obj = $man->getRole($item['name']);
+						if ($obj) $man->remove($obj);
 					}
 				}
 				AuthItem::updateAll(['module'=>$module->id], ['name' => array_keys($roles)]);
