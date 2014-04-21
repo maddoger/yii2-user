@@ -78,6 +78,7 @@ return array (
   'Not known' => 'Неизвестно',
   'Only letters, numbers and comma are acceptable.' => 'Можно использовать только буквы, цифры и точку.',
   'Permission' => 'Разрешение',
+  'Permissions' => 'Разрешения',
   'Password' => 'Пароль',
   'Password Hash' => 'Хеш пароля',
   'Password Reset Token' => 'Код сброса паролья',
