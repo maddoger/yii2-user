@@ -63,11 +63,11 @@ class WebUser extends BaseWebUser {
 	 * When this parameter is true (default), if the access check of an operation was performed
 	 * before, its result will be directly returned when calling this method to check the same
 	 * operation. If this parameter is false, this method will always call
-	 * [[AuthManager::checkAccess()]] to obtain the up-to-date access result. Note that this
+	 * [[AuthManager::can()]] to obtain the up-to-date access result. Note that this
 	 * caching is effective only within the same request and only works when `$params = []`.
 	 * @return boolean whether the operations can be performed by this user.
 	 */
-	public function checkAccess($operation, $params = [], $allowCaching = true)
+	public function can($operation, $params = [], $allowCaching = true)
 	{
 		//Check superadmin
 		if (!$this->isGuest) {
@@ -76,6 +76,6 @@ class WebUser extends BaseWebUser {
 				return true;
 			}
 		}
-		return parent::checkAccess($operation, $params, $allowCaching);
+		return parent::can($operation, $params, $allowCaching);
 	}
 }
