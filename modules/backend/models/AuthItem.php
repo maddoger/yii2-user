@@ -60,7 +60,7 @@ class AuthItem extends ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getChildren()
 	{
@@ -68,7 +68,7 @@ class AuthItem extends ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getParents()
 	{
@@ -76,7 +76,7 @@ class AuthItem extends ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getAssignment()
 	{
@@ -84,7 +84,7 @@ class AuthItem extends ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getUsers()
 	{
