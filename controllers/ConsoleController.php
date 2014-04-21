@@ -1,6 +1,6 @@
 <?php
 
-namespace maddoger\user\console\controllers;
+namespace maddoger\user\controllers;
 
 use Yii;
 use yii\console\Exception;
@@ -8,13 +8,13 @@ use yii\console\Controller;
 use yii\db\Connection;
 use maddoger\user\models\User;
 
-class UserController extends Controller
+class ConsoleController extends Controller
 {
 	public $db = 'db';
 
 	public function actionIndex()
 	{
-		$this->stdout('hello world!');
+		echo 'hello world!';
 	}
 
 	public function beforeAction($action)

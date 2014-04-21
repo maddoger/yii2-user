@@ -55,11 +55,6 @@ class UserModule extends Module
 	{
 		parent::init();
 
-		//Console
-		if (Yii::$app instanceof \yii\console\Application) {
-			$this->controllerNamespace = 'maddoger\user\console\controllers';
-		}
-
 		/*Yii::$app->on(User::EVENT_AFTER_LOGIN, function ($event) {
 			if ($event->identity) {
 				$event->identity->updateLastVisitTime();
