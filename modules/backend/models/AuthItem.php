@@ -22,7 +22,7 @@ use maddoger\core\ActiveRecord;
  */
 class AuthItem extends ActiveRecord
 {
-	const TYPE_OPERATION = Item::TYPE_OPERATION;
+	const TYPE_OPERATION = Item::TYPE_PERMISSION;
 	const TYPE_TASK = Item::TYPE_TASK;
 	const TYPE_ROLE = Item::TYPE_ROLE;
 
@@ -95,7 +95,7 @@ class AuthItem extends ActiveRecord
 	public static function getTypeValues()
 	{
 		return [
-			Item::TYPE_OPERATION => Yii::t('maddoger/user', 'Operation'),
+			Item::TYPE_PERMISSION => Yii::t('maddoger/user', 'Operation'),
 			Item::TYPE_TASK => Yii::t('maddoger/user', 'Task'),
 			Item::TYPE_ROLE => Yii::t('maddoger/user', 'Role')
 		];

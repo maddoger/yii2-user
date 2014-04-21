@@ -156,20 +156,20 @@ class UserModule extends Module
 	public function getRbacRoles()
 	{
 		return [
-			'user.create' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('maddoger/user', 'Create new users')],
-			'user.read' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('maddoger/user', 'View users')],
-			'user.update' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('maddoger/user', 'Update users')],
-			'user.delete' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('maddoger/user', 'Delete users')],
+			'user.create' => ['type'=>Item::TYPE_PERMISSION, 'description' => Yii::t('maddoger/user', 'Create new users')],
+			'user.read' => ['type'=>Item::TYPE_PERMISSION, 'description' => Yii::t('maddoger/user', 'View users')],
+			'user.update' => ['type'=>Item::TYPE_PERMISSION, 'description' => Yii::t('maddoger/user', 'Update users')],
+			'user.delete' => ['type'=>Item::TYPE_PERMISSION, 'description' => Yii::t('maddoger/user', 'Delete users')],
 			'user.manager' => [
 				'type' => Item::TYPE_ROLE,
 				'description' => Yii::t('maddoger/user', 'Users manager'),
 				'children' => [ 'user.create','user.read','user.update','user.delete' ]
 			],
 
-			'role.create' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('maddoger/user', 'Create new roles')],
-			'role.read' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('maddoger/user', 'View roles')],
-			'role.update' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('maddoger/user', 'Update roles')],
-			'role.delete' => ['type'=>Item::TYPE_OPERATION, 'description' => Yii::t('maddoger/user', 'Delete roles')],
+			'role.create' => ['type'=>Item::TYPE_PERMISSION, 'description' => Yii::t('maddoger/user', 'Create new roles')],
+			'role.read' => ['type'=>Item::TYPE_PERMISSION, 'description' => Yii::t('maddoger/user', 'View roles')],
+			'role.update' => ['type'=>Item::TYPE_PERMISSION, 'description' => Yii::t('maddoger/user', 'Update roles')],
+			'role.delete' => ['type'=>Item::TYPE_PERMISSION, 'description' => Yii::t('maddoger/user', 'Delete roles')],
 			'role.manager' => [
 				'type' => Item::TYPE_ROLE,
 				'description' => Yii::t('maddoger/user', 'Roles manager'),
