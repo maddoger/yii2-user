@@ -36,7 +36,7 @@ class AuthItemChild extends \maddoger\core\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getParentRecord()
 	{
@@ -44,7 +44,7 @@ class AuthItemChild extends \maddoger\core\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getChildRecord()
 	{

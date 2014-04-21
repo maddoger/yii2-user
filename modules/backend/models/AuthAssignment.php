@@ -53,7 +53,7 @@ class AuthAssignment extends \maddoger\core\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getItemName()
 	{
@@ -61,7 +61,7 @@ class AuthAssignment extends \maddoger\core\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getUser()
 	{
