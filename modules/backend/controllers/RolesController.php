@@ -183,20 +183,28 @@ class RolesController extends BackendController
 				//Delete old rules for module
 				$oldItems = AuthItem::find()->where(['module' => $module->id])->asArray()->all();
 
+                //var_dump($oldItems);
+
+
 				foreach ($roles as $name => $item) {
 					if (!isset($item['data'])) $item['data'] = null;
 					if (!isset($item['rule_name'])) $item['rule_name'] = null;
 					if (!isset($item['description'])) $item['data'] = null;
 
                     if ($item['type'] == Item::TYPE_PERMISSION) {
-                        if ($man->getPermission($name) !== null) {
+
+                        $permission = $man->getPermission($name);
+
+                        if ($permission !== null) {
                             //Item exists
-                            $r = AuthItem::findOne($name);
-                            $r->setAttributes($item);
-                            $r->save(false);
+                            $permission->ruleName = $item['rule_name'];
+                            $permission->data = $item['data'];
+                            $permission->description = $item['description'];
+                            $man->update($name, $permission);
+
                         } else {
                             $permission = $man->createPermission($name);
-                            //$permission->ruleName = $item['rule_name'];
+                            $permission->ruleName = $item['rule_name'];
                             $permission->data = $item['data'];
                             $permission->description = $item['description'];
                             $man->add($permission);
@@ -205,12 +213,23 @@ class RolesController extends BackendController
                         
                         if (($role = $man->getRole($name)) === null) {
                             $role = $man->createRole($name);
+                            $role->ruleName = $item['rule_name'];
+                            $role->data = $item['data'];
+                            $role->description = $item['description'];
+                            $man->add($role);
+                        } else {
+
+                            $role->ruleName = $item['rule_name'];
+                            $role->data = $item['data'];
+                            $role->description = $item['description'];
+                            $man->update($name, $role);
                         }
 
-                        $role->ruleName = $item['rule_name'];
-                        $role->data = $item['data'];
-                        $role->description = $item['description'];
-                        $man->add($role);
+                        //Удаляем старые связи
+                        $oldChildren = $man->getChildren($name);
+                        foreach ($oldChildren as $child) {
+                           $man->removeChild($role, $child);
+                        }
 
                         if (isset($item['children']) && is_array($item['children'])) {
                             foreach ($item['children'] as $child) {
