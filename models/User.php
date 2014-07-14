@@ -7,7 +7,6 @@ use maddoger\user\modules\backend\models\AuthItemChild;
 use Yii;
 use maddoger\core\ActiveRecord;
 use yii\base\NotSupportedException;
-use yii\helpers\Security;
 use yii\web\IdentityInterface;
 
 /**
@@ -250,7 +249,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function validatePassword($password)
     {
-        return Security::validatePassword($password, $this->password_hash);
+        return Yii::$app->security->validatePassword($password, $this->password_hash);
     }
 
     public function rules()
@@ -310,10 +309,10 @@ class User extends ActiveRecord implements IdentityInterface
                     $this->getScenario() === 'backendEdit' && !empty($this->password)
                 )
             ) {
-                $this->password_hash = Security::generatePasswordHash($this->password);
+                $this->password_hash = Yii::$app->security->generatePasswordHash($this->password);
             }
             if ($this->isNewRecord) {
-                $this->auth_key = Security::generateRandomKey();
+                $this->auth_key = Yii::$app->security->generateRandomKey();
             }
 
             $dirty = $this->getDirtyAttributes(['email', 'username']);

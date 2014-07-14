@@ -5,7 +5,6 @@ namespace maddoger\user\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\BadRequestHttpException;
-use yii\helpers\Security;
 
 use maddoger\core\FrontendController;
 use maddoger\user\models\LoginForm;
@@ -116,7 +115,7 @@ class BackendAuthController extends FrontendController
 			return false;
 		}
 
-		$user->password_reset_token = Security::generateRandomKey();
+		$user->password_reset_token = Yii::$app->security->generateRandomKey();
 		if ($user->save(false)) {
 			return \Yii::$app->mail->compose($this->module->passwordResetTokenEmail, ['user' => $user])
 								   ->setFrom([\Yii::$app->params['supportEmail'] => \Yii::$app->name . ' robot'])
