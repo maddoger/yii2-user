@@ -41,7 +41,7 @@ use maddoger\user\modules\backend\models\AuthItem;
             Yii::t('maddoger/user', 'Permissions') => $items[2],
         ];
 
-		echo $form->field($model, 'children')->listBox($items, ['class'=>'form-control select2', 'multiple'=> true, 'prompt' => Yii::t('maddoger/user', 'No children')]);
+		echo $form->field($model, 'children')->listBox($items, ['class'=>'form-control select2', 'multiple'=> true, 'size'=>20, 'prompt' => Yii::t('maddoger/user', 'No children')]);
 
 		?>
 

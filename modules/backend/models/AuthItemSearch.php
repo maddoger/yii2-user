@@ -47,12 +47,10 @@ class AuthItemSearch extends Model
 			'query' => $query,
 		]);
 
-		if (!($this->load($params) && $this->validate())) {
-			if (count($query->orderBy) == 0) {
-				$query->addOrderBy('name');
-			}
-			$this->addCondition($query, 'type');
+        $dataProvider->sort->defaultOrder = ['name' => SORT_ASC];
 
+		if (!($this->load($params) && $this->validate())) {
+            $this->addCondition($query, 'type');
 			return $dataProvider;
 		}
 

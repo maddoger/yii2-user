@@ -182,9 +182,7 @@ class RolesController extends BackendController
 
 				//Delete old rules for module
 				$oldItems = AuthItem::find()->where(['module' => $module->id])->asArray()->all();
-
                 //var_dump($oldItems);
-
 
 				foreach ($roles as $name => $item) {
 					if (!isset($item['data'])) $item['data'] = null;
@@ -194,6 +192,7 @@ class RolesController extends BackendController
                     if ($item['type'] == Item::TYPE_PERMISSION) {
 
                         $permission = $man->getPermission($name);
+                        //var_dump($name, $permission);
 
                         if ($permission !== null) {
                             //Item exists

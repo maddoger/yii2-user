@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			[
 				'value' => function ($model, $index, $widget){
 						$values = AuthItem::getTypeValues();
-						return $values[$model->type];
+						return isset($values[$model->type]) ? $values[$model->type] : null;
 					},
 				'filter' => AuthItem::getTypeValues(),
 				'attribute' => 'type',
