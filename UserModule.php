@@ -190,10 +190,10 @@ class UserModule extends Module
 				'roles' => ['user.read', 'role.read'],
 				//'url' => 'user/user-backend/index',
 				'items' => [
-					['label' => Yii::t('maddoger/user', 'Users'), 'fa'=>'user', 'url'=> ['/user/users/index'],
-						'activeUrl'=> ['/user/users/*'], 'roles' => ['user.read'],],
-					['label' => Yii::t('maddoger/user', 'Roles'), 'fa'=>'group', 'url'=> ['/user/roles/index'],
-						'activeUrl'=> ['/user/roles/*'], 'roles' => ['role.read']],
+					['label' => Yii::t('maddoger/user', 'Users'), 'fa'=>'user', 'url'=> ['/user/backend/users/index'],
+						'activeUrl'=> ['/user/backend/users/*'], 'roles' => ['user.read'],],
+					['label' => Yii::t('maddoger/user', 'Roles'), 'fa'=>'group', 'url'=> ['/user/backend/roles/index'],
+						'activeUrl'=> ['/user/backend/roles/*'], 'roles' => ['role.read']],
 				],
 			]
 		];
