@@ -13,6 +13,5 @@ class BackendAuthAsset extends AssetBundle
 		'yii\web\YiiAsset',
 		'yii\bootstrap\BootstrapAsset',
 		'yii\bootstrap\BootstrapPluginAsset',
-		'yii\bootstrap\BootstrapThemeAsset',
 	];
 }
